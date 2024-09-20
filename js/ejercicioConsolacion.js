@@ -23,5 +23,4 @@
     setTimeout(alert, 3000, nombre);
 
 //d)Genera una funcion que dada una cadena pinte: El numero de caracteres que hay. El numero de vocales. Si empieza por "A" o no.
-
     
