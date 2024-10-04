@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //2.
     function redimensionar() {
-        variable.textContent = `Width: ${window.innerWidth}, Height: ${window.innerHeight}`;
+        variable.textContent = `${window.innerWidth} - ${window.innerHeight}`;
     }
     
 //3.
