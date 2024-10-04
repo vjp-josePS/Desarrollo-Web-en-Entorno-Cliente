@@ -19,6 +19,5 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
 //3.
-    redimensionar();
     window.addEventListener("resize", redimensionar);
 });
