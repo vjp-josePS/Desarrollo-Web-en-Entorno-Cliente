@@ -8,3 +8,12 @@
 7- Pinta por pantalla todos los "titles" de los elementos que sean de la clase "linkNormal".
 8- Pinta todos los elementos "a" que sean hermanos (anteriores y posteriores) del enlace que tenga como título "spiderman.*/
 
+//1
+console.log(document.querySelector("#div1 a"). tittle);
+//2
+console.log(document.querySelector("#div > a"));
+//3
+console.log(document.querySelector("#div > p > a"));
+//4
+console.log(document.querySelector(".linkNormal").nextElementSibling);
+//5
