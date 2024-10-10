@@ -11,8 +11,60 @@ Sugerencias:
 - Crea otra función a la que asignamos los eventos de cada button.
 */
 
-const colores = ["rojo", "azul", "verde", "amarillo"];
+const colors = ['red', 'blue', 'green', 'yellow'];
+let currentColorIndex = 0;
 
-const matriz = Array(10).fill().map(() => Array(10).fill(0));
+function createMatrix() {
+    const contenedorGeneral = document.getElementById('contenedorGeneral');
+    for (let i = 0; i < 10; i++) {
+        const row = document.createElement('div');
+        row.className = 'row';
+        for (let j = 0; j < 10; j++) {
+            const element = document.createElement('div');
+            element.className = 'matrix-element';
+            element.style.backgroundColor = colors[currentColorIndex];
+            element.addEventListener('click', () => changeColor(element));
+            element.addEventListener('contextmenu', (event) => {
+                event.preventDefault();
+                changeColorOnRightClick(element);
+            });
+            row.appendChild(element);
+        }
+        contenedorGeneral.appendChild(row);
+    }
+}
 
-console.log(matriz);
+function changeColor(element) {
+    const currentIndex = colors.indexOf(element.style.backgroundColor);
+    const nextIndex = (currentIndex + 1) % colors.length;
+    element.style.backgroundColor = colors[nextIndex];
+}
+
+function changeColorOnRightClick(element) {
+    const currentIndex = colors.indexOf(element.style.backgroundColor);
+    const previousIndex = (currentIndex - 1 + colors.length) % colors.length;
+    element.style.backgroundColor = colors[previousIndex];
+}
+
+// Add this new function to handle mouse wheel event
+function changeToGray() {
+    currentColorIndex = 0; // Reset to red color
+    updateMatrixColors();
+}
+
+function updateMatrixColors() {
+    const elements = document.querySelectorAll('.matrix-element');
+    elements.forEach(element => {
+        element.style.backgroundColor = colors[currentColorIndex];
+    });
+}
+
+// Add this new function to handle mouse wheel event
+window.addEventListener('wheel', (event) => {
+    if (event.deltaY !== 0) {
+        // Only react to vertical wheel movement
+        changeToGray();
+    }
+});
+
+document.addEventListener('DOMContentLoaded', createMatrix);
