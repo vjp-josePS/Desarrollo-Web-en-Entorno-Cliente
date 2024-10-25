@@ -13,5 +13,4 @@ function mostrarNota(){
     }
 
     document.getElementById("listaDeNotas").appendChild(nuevaNota);
-    document.getElementById("mostrarTexto").textContent = "";
 }
