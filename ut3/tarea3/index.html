@@ -1,0 +1,112 @@
+<html>
+
+<head>
+  <title>Tarea3</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="css/tarea3.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">FoodScore</a>
+  </nav>
+
+  <div class="container">
+    <form action="#" class="mt-4" id="newPlace" novalidate>
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre del restaurante">
+        <div class="invalid-feedback">El campo nombre es obligatorio y sólo puede tener letras y espacios.</div>
+      </div>
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Descripción"></textarea>
+        <div class="invalid-feedback">El campo descripción es necesario.</div>
+      </div>
+      <div class="form-group">
+        <label for="cocina">Cocina</label>
+        <input type="text" class="form-control" name="cocina" id="cocina" placeholder="Cocina">
+        <div class="invalid-feedback">El campo cocina es obligatorio.</div>
+      </div>
+      <p>Días de apertura</p>
+      <div class="form-group">
+        <div class="custom-control custom-control-inline custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="checkLunes" name="dias" value="1" checked>
+          <label class="custom-control-label" for="checkLunes">Lun</label>
+        </div>
+        <div class="custom-control custom-control-inline custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="checkMartes" name="dias" value="2" checked>
+          <label class="custom-control-label" for="checkMartes">Mar</label>
+        </div>
+        <div class="custom-control custom-control-inline custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="checkMiercoles" name="dias" value="3" checked>
+          <label class="custom-control-label" for="checkMiercoles">Mié</label>
+        </div>
+        <div class="custom-control custom-control-inline custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="checkJueves" name="dias" value="4" checked>
+          <label class="custom-control-label" for="checkJueves">Jue</label>
+        </div>
+        <div class="custom-control custom-control-inline custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="checkViernes" name="dias" value="5" checked>
+          <label class="custom-control-label" for="checkViernes">Vie</label>
+        </div>
+        <div class="custom-control custom-control-inline custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="checkSabado" name="dias" value="6" checked>
+          <label class="custom-control-label" for="checkSabado">Sáb</label>
+        </div>
+        <div class="custom-control custom-control-inline custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="checkDomingo" name="dias" value="0" checked>
+          <label class="custom-control-label" for="checkDomingo">Dom</label>
+        </div>
+        <div class="text-danger d-none" id="diasError"><small>Debes seleccionar al menos un día de apertura.</small></div>
+      </div>
+      <div class="form-group">
+        <label for="telefono">Número de teléfono</label>
+        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Número de teléfono">
+        <div class="invalid-feedback">Debes insertar un teléfono válido.</div>
+      </div>
+      <div class="form-group">
+        <label for="foto">Foto</label>
+        <input type="file" class="form-control" id="foto" name="foto">
+        <div class="invalid-feedback">La foto es obligatoria.</div>
+      </div>
+      <img src="" alt="" id="imgPreview" class="img-thumbnail">
+
+      <button type="submit" class="btn btn-primary">Crear</button>
+    </form>
+
+    <div id="placesContainer" class="card-columns">
+      <!-- EJEMPLO DE CÓMO SE AÑADE UN RESTAURANTE NUEVO: -->
+      <!-- <div class="card">
+        <img class="card-img-top" src="./rest1.jpg">
+        <div class="card-body">
+          <h5 class="card-title">Nombre del restaurante</h5>
+          <p class="card-text">Aquí la descripción.</p>
+          <div class="card-text">
+            <small class="text-muted">
+              <strong>Abre: </strong>Lun, Mar, Mié, Jue, Vie, Sáb, Dom
+            </small>
+            <span class="badge badge-success">Abierto</span>
+            <span class="badge badge-danger">Cerrado</span>
+          </div>
+          <div class="card-text">
+            <small class="text-muted">
+              <strong>Teléfono: </strong>934823234
+            </small>
+          </div>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">
+            Tipo de Cocina
+          </small>
+        </div>
+      </div> -->
+    </div>
+  </div>
+
+  <script src="js/tarea3.js"></script>
+</body>
+
+</html>

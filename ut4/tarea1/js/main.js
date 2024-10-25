@@ -63,3 +63,36 @@ var coche = {
 }
 
 console.log(coche.getInfo());
+
+// d)
+
+var obraTeatro = {
+    titulo: "el lazarillo de tormes",
+    fechaLanzamiento: 1554,
+    director: {
+            nombre: "Alfonso de Valdés",
+            actores:[
+                {
+                    nombreactor: "Juan",
+                    edad: 24,
+                    nActuaciones: 3,
+                },
+                {
+                    nombreactor: "Hugo",
+                    edad: 20,
+                    nActuaciones: 4,
+                },
+                {
+                    nombreactor: "Ruben",
+                    edad: 28,
+                    nActuaciones: 5,
+                },
+            ]
+        },
+
+        getInfo(){
+            return "Título de la obra: " + this.titulo + "\nFecha de lanzamiento: " + this.fechaLanzamiento + "\nDirector: " + this.director.nombre + "\nActores: " + "\nNombre: " + this.director.actores[0].nombreactor + "\nEdad: " + this.director.actores[0].edad + "\nNúmero de apariciones: " + this.director.actores[0].nActuaciones + ".\n" + "\nNombre: " + this.director.actores[1].nombreactor + "\nEdad: " + this.director.actores[1].edad + "\nNúmero de apariciones: " + this.director.actores[1].nActuaciones + ".\n" + "\nNombre: " + this.director.actores[2].nombreactor + "\nEdad: " + this.director.actores[2].edad + "\nNúmero de apariciones: " + this.director.actores[2].nActuaciones + "."
+        }
+}
+
+console.log(obraTeatro.getInfo());
