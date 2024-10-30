@@ -4,9 +4,13 @@ html{
 
 body{
     border-radius: 15px;
-    background-color: white;
+    background-color: rgba(47, 0, 255, 0.507);
     margin: 20px;
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 200px;
+    padding-right: 200px;
+    text-align: center;
 }
 
 #formularioCumple{
@@ -23,16 +27,18 @@ label{
     border: 1px black solid;
     text-align: center;
     padding: 20px;
+    background-color: rgba(47, 0, 255, 0.699);
 }
 
 li{
     border-radius: 15px;
     background-color: lightgrey;
-    color: white;
+    color: black;
     padding: 20px;
     width: 250px;
     margin: auto;
     margin-bottom: 20px;
+    list-style: none;
 }
 
 img{

@@ -69,29 +69,41 @@ console.log(coche.getInfo());
 var obraTeatro = {
     titulo: "el lazarillo de tormes",
     fechaLanzamiento: 1554,
+    actores:[
+        {
+            nombreactor: "Juan",
+            edad: 24,
+            nActuaciones: 3,
+        },
+        {
+            nombreactor: "Hugo",
+            edad: 20,
+            nActuaciones: 4,
+        },
+        {
+            nombreactor: "Ruben",
+            edad: 28,
+            nActuaciones: 5,
+        },
+    ],
     director: {
             nombre: "Alfonso de Valdés",
-            actores:[
-                {
-                    nombreactor: "Juan",
-                    edad: 24,
-                    nActuaciones: 3,
-                },
-                {
-                    nombreactor: "Hugo",
-                    edad: 20,
-                    nActuaciones: 4,
-                },
-                {
-                    nombreactor: "Ruben",
-                    edad: 28,
-                    nActuaciones: 5,
-                },
+            obras:[
+                {titulo: "el lazarillo de tormes",},
+                {titulo: "el lazarillo de juan",},
+                {titulo: "el lazarillo de nacho",},
             ]
         },
 
         getInfo(){
-            return "Título de la obra: " + this.titulo + "\nFecha de lanzamiento: " + this.fechaLanzamiento + "\nDirector: " + this.director.nombre + "\nActores: " + "\nNombre: " + this.director.actores[0].nombreactor + "\nEdad: " + this.director.actores[0].edad + "\nNúmero de apariciones: " + this.director.actores[0].nActuaciones + ".\n" + "\nNombre: " + this.director.actores[1].nombreactor + "\nEdad: " + this.director.actores[1].edad + "\nNúmero de apariciones: " + this.director.actores[1].nActuaciones + ".\n" + "\nNombre: " + this.director.actores[2].nombreactor + "\nEdad: " + this.director.actores[2].edad + "\nNúmero de apariciones: " + this.director.actores[2].nActuaciones + "."
+            return "Título de la obra: " + this.titulo + 
+            "\nFecha de lanzamiento: " + this.fechaLanzamiento + 
+            "\nDirector: " + this.director.nombre + 
+            "\nActores: " + 
+            "\nNombre: " + this.actores[0].nombreactor + "\nEdad: " + this.actores[0].edad + "\nNúmero de apariciones: " + this.actores[0].nActuaciones + ".\n" + 
+            "\nNombre: " + this.actores[1].nombreactor + "\nEdad: " + this.actores[1].edad + "\nNúmero de apariciones: " + this.actores[1].nActuaciones + ".\n" + 
+            "\nNombre: " + this.actores[2].nombreactor + "\nEdad: " + this.actores[2].edad + "\nNúmero de apariciones: " + this.actores[2].nActuaciones + ".\n" + 
+            "\nOtras obras del director: " + this.director.obras[0].titulo + ", " + this.director.obras[1].titulo + " y " + this.director.obras[2].titulo + "."
         }
 }
 
