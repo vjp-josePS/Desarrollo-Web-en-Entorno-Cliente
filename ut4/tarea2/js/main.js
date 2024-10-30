@@ -64,8 +64,9 @@ class Restaurante {
 
     pintarInfo() {
         console.log("Restaurante: " + this.nombre);
-
-
+        this.trabajadores.forEach(trabajador => {
+            trabajador.pintarInfo();
+        });
     }
 
     getPagosSemanales(){
