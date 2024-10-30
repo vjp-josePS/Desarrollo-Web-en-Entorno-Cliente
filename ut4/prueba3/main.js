@@ -1,7 +1,7 @@
 /*
 Prueba3: Utilizaremo speticiones AJAX + el método de pintar monumento para pintar la información por pantalla de cada uno de los monumentos.
 
-1- Vamos a reciclar la función pintarInfo del ejercicio 2 para crear una función que pinte los campos: nombre del documetno, el tipo de monumento, la latitud, la longitud, y la url que viene dentro del campo "uri". Esta vez pasaremos el objeto monumento por parámetros:
+1- Vamos a reciclar la función pintarInfo del ejercicio 2 para crear una función que pinte los campos: nombre del documento, el tipo de monumento, la latitud, la longitud, y la url que viene dentro del campo "uri". Esta vez pasaremos el objeto monumento por parámetros:
 
 2- Haremos la petición AJAX como hemos estado haciendo en las diapositivas anteriores. La diferencia es que esta vez llamaremos a una función que nos procese el objeto JSON resultante: 
 
