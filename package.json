@@ -1,5 +1,9 @@
 {
   "dependencies": {
+<<<<<<< HEAD
     "json-server": "^1.0.0-beta.3"
+=======
+    "chart.js": "^4.4.6"
+>>>>>>> 20707e3a97bea901a74771b78371ee370d92334e
   }
 }
