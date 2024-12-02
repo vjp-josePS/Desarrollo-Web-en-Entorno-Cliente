@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cesta de la Compra - Mini-Market</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <script type="module">
+        import { cargarHeader } from './js/header.js';
+        cargarHeader();
+    </script>
+
+    <div class="banner-content">
+        <h1>Tu Cesta de la Compra</h1>
+    </div>
+
+    <div class="container">
+        <div class="tabla-carrito">
+            <table class="table" id="tabla-carrito">
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los productos se cargarán dinámicamente aquí -->
+                </tbody>
+            </table>
+            <div id="carrito-vacio" class="empty-cart d-none">
+                <h3>La cesta está vacía</h3>
+                <p>¡Vete a comprar anda!</p>
+            </div>
+        </div>
+
+        <div class="text-end btn-finalizar">
+            <button class="btn btn-success btn-lg" onclick="finalizarCompra()">
+                Finalizar Compra
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module">
+        import { Carrito } from './js/carrito.js';
+
+        // Cargar productos al iniciar la página
+        document.addEventListener('DOMContentLoaded', async () => {
+            await Carrito.cargarProductosEnCesta();
+            await Carrito.actualizarCabeceraCarrito();
+
+            // Mostrar mensaje si el carrito está vacío
+            const tbody = document.querySelector('#tabla-carrito tbody');
+            const carritoVacio = document.getElementById('carrito-vacio');
+            if (!tbody.children.length) {
+                document.querySelector('.tabla-carrito table').classList.add('d-none');
+                document.querySelector('.btn-finalizar').classList.add('d-none');
+                carritoVacio.classList.remove('d-none');
+            }
+        });
+
+        // Función para finalizar la compra
+        window.finalizarCompra = function () {
+            alert('¡Gracias por tu compra!');
+            // Aquí podrías añadir más lógica para procesar la compra
+        };
+    </script>
+</body>
+
+</html>

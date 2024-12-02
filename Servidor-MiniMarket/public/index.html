@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-Market</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <script type="module">
+        import { cargarHeader } from './js/header.js';
+        cargarHeader();
+    </script>
+
+    <div class="banner">
+        <div class="banner-content">
+            <h1>Mini-Market</h1>
+            <p>Todas las ofertas de los productos más interesantes, ahora con un descuento adicional por el Black Friday, no dejes escapar esta oportunidad de actualizar tus dispositivos a un precio irrisorio.</p>
+        </div>
+    </div>
+
+    <h2 class="productos-titulo">Productos destacados</h2>
+    <div class="productos-grid" id="productos-destacados">
+        <!-- Los productos se cargarán dinámicamente aquí -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/index.js"></script>
+</body>
+</html> 
