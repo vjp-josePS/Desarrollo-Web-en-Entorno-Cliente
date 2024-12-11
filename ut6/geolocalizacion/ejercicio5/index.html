@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador de Productos</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Administrador de Productos</h1>
+        
+        <table id="tablaProductos">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Cantidad</th>
+                    <th>precioUnidad</th>
+                    <th>Marca</th>
+                </tr>
+            </thead>
+            <tbody id="productosBody">
+            </tbody>
+        </table>
+
+        <div class="formulario">
+            <p>Emplea el siguiente formulario para añadir productos.</p>
+            <form id="productoForm">
+                <div class="form-group">
+                    <label for="item">Nombre del producto:</label>
+                    <input type="text" id="item">
+                </div>
+                <div class="form-group">
+                    <label for="cantidad">Número de unidades:</label>
+                    <input type="number" id="cantidad">
+                </div>
+                <div class="form-group">
+                    <label for="precioUnidad">Precio por unidad:</label>
+                    <input type="number" id="precioUnidad" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="marca">Marca del producto:</label>
+                    <input type="text" id="marca">
+                </div>
+                <button type="submit">Añadir Producto</button>
+            </form>
+        </div>
+    </div>
+    <script src="js/BaseDatos.js"></script>
+    <script src="js/Producto.js"></script>
+    <script src="js/js.js"></script>
+</body>
+</html> 

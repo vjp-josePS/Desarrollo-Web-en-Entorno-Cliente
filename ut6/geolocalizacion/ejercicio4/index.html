@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso y edad</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Acceso y edad</h1>
+        <p>En esta web se queda registrado el acceso de los usuarios y su edad. Puedes añadir nuevos usuarios y también puedes consultar los usuarios ya inscritos con su correspondiente edad.</p>
+        
+        <div class="form-container">
+            <label for="nombreInput">Introduce tu nombre:</label>
+            <input type="text" id="nombreInput" placeholder="Nombre">
+            <button onclick="buscarUsuario()">Enviar</button>
+        </div>
+
+        <div id="edadInput" class="hidden">
+            <input type="number" id="edadNumero" placeholder="Edad">
+            <button onclick="guardarUsuario()">Guardar</button>
+        </div>
+
+        <div class="consulta">
+            <p>Puedes consultar quién se ha registrado en esta Web:</p>
+            <button onclick="consultarUsuarios()" class="consultar">Consultar</button>
+        </div>
+
+        <div id="listaUsuarios"></div>
+    </div>
+    <script src="js/js.js"></script>
+</body>
+</html>
