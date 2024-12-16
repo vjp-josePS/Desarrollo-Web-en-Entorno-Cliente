@@ -22,7 +22,7 @@ bares.results.bindings.forEach(bar => {
     const marker = L.marker([lat, lng]).addTo(map);
     marker.bindPopup(`
         <h3>${nombre}</h3>
-        <p><strong>Dirección:</strong> ${direccion}</p>
+        
         <p><strong>Teléfono:</strong> ${telefono}</p>
         <p><strong>Sirve comida:</strong> ${sirveComida}</p>
     `);
