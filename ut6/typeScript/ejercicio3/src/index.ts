@@ -1,49 +1,61 @@
-interface Dimensionar{
-getDimensiones():number;
+interface BiDimensional {
+    getArea(): number;
+    getInfo(): void;
 }
 
-class Circulo implements Dimensionar{
-    constructor(public radio:number){}
+class Circulo implements BiDimensional {
+    constructor(public radio: number) {}
 
-    getDimensiones(): number {
-        let area = 2 * 3.14 * this.radio;
+    getArea(): number {
+        let area = 3.14 * this.radio * this.radio;
 
         return area;
     }
+
+    getInfo(): void {
+        console.log("La figura es un círculo de radio: " + this.radio);
+    }
 }
 
-class Rectangulo implements Dimensionar{
-    constructor(public lado1:number, public lado2:number){}
+class Rectangulo implements BiDimensional {
+    constructor(public lado1: number, public lado2: number) {}
 
-    getDimensiones(): number {
+    getArea(): number {
         let area = this.lado1 * this.lado2;
 
         return area;
     }
-}
 
-class Triangulo implements Dimensionar{
-    constructor(public base:number, public altura:number){}
-
-    getDimensiones(): number {
-        let area = this.base * this.altura;
-
-        return area;
+    getInfo(): void {
+        console.log("La figura es un rectángulo de lado1 " + this.lado1 + " y de lado2 " + this.lado2);
     }
 }
 
-let objeto1:Dimensionar = new Circulo(3);
+class Triangulo implements BiDimensional {
+    constructor(public base: number, public altura: number) {}
 
-console.log("La figura es un círculo con radio " + objeto1['radio']);
+    getArea(): number {
+        let area = (this.base * this.altura) / 2;
 
-console.log("Su área es: " + objeto1.getDimensiones());
+        return area;
+    }
 
-let objeto2:Dimensionar = new Rectangulo(4, 6);
+    getInfo(): void {
+        console.log("La figura es un triángulo de base " + this.base + " y de altura " + this.altura);
+    }
+}
 
-console.log("La figura es un rectángulo con el primer lado " + objeto2['lado1'] + " y con el segundo lado " + objeto2['lado2']);
-console.log("Su área es: " + objeto2.getDimensiones());
+let objeto1: BiDimensional = new Circulo(3);
 
-let objeto3:Dimensionar = new Triangulo(3, 6);
+objeto1.getInfo();
+console.log("Su área es: " + objeto1.getArea());
 
-console.log("La figura es un triángulo con base " + objeto3['base'] + " y altura " + objeto3['altura']);
-console.log("Su área es: " + objeto3.getDimensiones());
+let objeto2: BiDimensional = new Rectangulo(4, 6);
+
+objeto2.getInfo();
+console.log("Su área es: " + objeto2.getArea());
+
+let objeto3: BiDimensional = new Triangulo(3, 6);
+
+objeto3.getInfo();
+console.log("Su área es: " + objeto3.getArea());
