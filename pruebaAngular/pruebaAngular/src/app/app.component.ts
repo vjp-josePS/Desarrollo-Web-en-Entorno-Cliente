@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ListaProductosComponent } from './carrousel/ListaProductosComponent';
+import { ListaProductosComponent } from './listaProductos/ListaProductosComponent';
 
 @Component({
   selector: 'app-root',

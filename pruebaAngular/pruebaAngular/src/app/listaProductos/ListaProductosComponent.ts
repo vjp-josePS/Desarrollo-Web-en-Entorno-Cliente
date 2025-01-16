@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IProducto } from '../interface/i-producto';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'ListaProductosComponent',
-  imports: [],
+  imports: [CurrencyPipe, DatePipe],
   templateUrl: './ListaProductosComponent.html',
   styleUrl: './ListaProductosComponent.scss'
 })
@@ -25,7 +26,7 @@ export class ListaProductosComponent {
       precio: 75,
       imagenUrl: 'https://static.fnac-static.com/multimedia/Images/ES/NR/e0/0f/15/1380320/1540-1/tsp20170822090055/Disco-duro-D-interno-Sandisk-Plus-2-5-240-GB.jpg',
       puntuacion: 4,
-      imagenWidth: '50'
+      imagenWidth: '70'
     },
     {
       id: 2,
@@ -34,7 +35,7 @@ export class ListaProductosComponent {
       precio: 75,
       imagenUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl17qCBUPlMdhuJV2UNUQHJoJw2cvnZ_xwkw&s',
       puntuacion: 4,
-      imagenWidth: '50'
+      imagenWidth: '70'
     }
   ];
 
@@ -48,7 +49,7 @@ export class ListaProductosComponent {
     'color': 'red'
   }
 
-  mostrarPrecio(index:number) {
+  mostrarPrecio(index: number) {
     alert(this.productos[index].precio)
   }
 
@@ -64,7 +65,10 @@ export class ListaProductosComponent {
 
   toggleImagenes(){
     if(this.botonFlag){
-        
+      this.botonFlag=false;
+    } else{
+      this.botonFlag=true;
     }
+
   }
 }

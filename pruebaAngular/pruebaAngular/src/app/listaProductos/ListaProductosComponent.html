@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header bg-primary text-while">
+    <div class="card-header bg-primary text-white">
         {{titulo}}
     </div>
 </div>
@@ -9,17 +9,20 @@
             @if(productos.length != 0){
                 <table class="table table-stripped">
                     <thead>
+                        <tr>
                         <th><button (click) = "toggleImagenes()" [class] = "botonFlag? clasesBoton : clasesBotonFalse">
                             @if(botonFlag){
                                 Mostrar
                             } @else{
                                 Ocultar
                             }
+
                         </button></th>
                         <!--<th>{{ cabecera.imagenUrl }}</th>-->
                         <th>{{ cabecera.descripcion }}</th>
                         <th>{{ cabecera.precio }}</th>
                         <th>{{ cabecera.disponibilidad }}</th>
+                    </tr>
                     </thead>
                 
                 <tbody>
@@ -27,8 +30,8 @@
                     <tr>
                         <td><img [src] = "producto.imagenUrl" [width] = "producto.imagenWidth" [class] = "botonFlag? {'d-none': false} : {'d-none': true}"></td>
                         <td [style] = "esPar? estilosPar : estilosImpar">{{ producto.descripcion }}</td>
-                        <td (click) = "mostrarPrecio(i)" [class] = "{'precioPar': esPar, 'precioImpar': !esPar}">{{ producto.precio }}</td>
-                        <td>{{ producto.disponibilidad }}</td>
+                        <td (click) = "mostrarPrecio(i)" [class] = "{'precioPar': esPar, precioImpar: !esPar}">{{ producto.precio | currency:'EUR'}}</td>
+                        <td>{{ producto.disponibilidad | date:'dd/MM/yyyy' }}</td>
                         
                     </tr>
                     }
