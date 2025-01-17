@@ -5,40 +5,60 @@
 </div>
 <div class="card-block">
     <div class="table-responsitive">
+        <label for="busquedaProductos">Búsqueda: </label>
+        <input type="text" name="busquedaProductos" id="busquedaProductos"
+            (input)="onSearch($event)">
         @if (productos != null){
-            @if(productos.length != 0){
-                <table class="table table-stripped">
-                    <thead>
-                        <tr>
-                        <th><button (click) = "toggleImagenes()" [class] = "botonFlag? clasesBoton : clasesBotonFalse">
+        @if(productos.length != 0){
+        <table class="table table-stripped">
+            <thead>
+                <tr>
+                    <th><button (click)="toggleImagenes()"
+                            [class]="botonFlag? clasesBoton : clasesBotonFalse">
                             @if(botonFlag){
-                                Mostrar
+                            Mostrar
                             } @else{
-                                Ocultar
+                            Ocultar
                             }
 
                         </button></th>
-                        <!--<th>{{ cabecera.imagenUrl }}</th>-->
-                        <th>{{ cabecera.descripcion }}</th>
-                        <th>{{ cabecera.precio }}</th>
-                        <th>{{ cabecera.disponibilidad }}</th>
-                    </tr>
-                    </thead>
-                
-                <tbody>
-                    @for(producto of productos; track producto.id; let i = $index; let esPar = $even){
-                    <tr>
-                        <td><img [src] = "producto.imagenUrl" [width] = "producto.imagenWidth" [class] = "botonFlag? {'d-none': false} : {'d-none': true}"></td>
-                        <td [style] = "esPar? estilosPar : estilosImpar">{{ producto.descripcion }}</td>
-                        <td (click) = "mostrarPrecio(i)" [class] = "{'precioPar': esPar, precioImpar: !esPar}">{{ producto.precio | currency:'EUR'}}</td>
-                        <td>{{ producto.disponibilidad | date:'dd/MM/yyyy' }}</td>
-                        
-                    </tr>
-                    }
-                </tbody>
-            </table>
-            }
+                    <!--<th>{{ cabecera.imagenUrl }}</th>-->
+                    <th>{{ cabecera.descripcion }}</th>
+                    <th>{{ cabecera.precio }}</th>
+                    <th>{{ cabecera.disponibilidad }}</th>
+                    <th>{{ cabecera.puntuacion }}</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for(producto of productosFiltrados; track producto.id; let i =
+                $index;
+                let esPar = $even){
+                <tr>
+                    <td><img [src]="producto.imagenUrl"
+                            [width]="producto.imagenWidth"
+                            [class]="botonFlag? {'d-none': false} : {'d-none': true}"></td>
+                    <td [style]="esPar? estilosPar : estilosImpar">{{
+                        producto.descripcion }}</td>
+                    <td (click)="mostrarPrecio(i)"
+                        [class]="{'precioPar': esPar, precioImpar: !esPar}">{{
+                        producto.precio | currency:'EUR'}}</td>
+                    <td>{{ producto.disponibilidad | date:'dd/MM/yyyy' }}</td>
+
+                    
+                        <td>
+                            @for(estrellas of [1, 2, 3, 4, 5]; track estrellas){
+                                <mat-icon [style.color]="(estrellas <= producto.puntuacion) ? 'gold' : 'gray'">
+                                    star</mat-icon>
+                            }
+                        </td>
+                    
+                </tr>
+                }
+            </tbody>
+        </table>
         }
-        
+        }
+
     </div>
 </div>

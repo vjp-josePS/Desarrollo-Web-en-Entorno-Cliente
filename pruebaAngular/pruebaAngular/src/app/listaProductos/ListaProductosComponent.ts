@@ -1,21 +1,26 @@
 import { Component } from '@angular/core';
 import { IProducto } from '../interface/i-producto';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'ListaProductosComponent',
-  imports: [CurrencyPipe, DatePipe],
+  imports: [CurrencyPipe, DatePipe, MatIcon],
   templateUrl: './ListaProductosComponent.html',
   styleUrl: './ListaProductosComponent.scss'
 })
 export class ListaProductosComponent {
-    botonFlag = true;
+  
+  filtroBusqueda = "";
+  botonFlag = true;
   titulo = 'Lista de productos';
+
   cabecera = {
     imagenUrl: 'imagen',
     descripcion: 'productos',
     precio: 'precio',
-    disponibilidad: 'disponibilidad'
+    disponibilidad: 'disponibilidad',
+    puntuacion: 'puntuacion'
   }
 
   productos: IProducto[] = [
@@ -32,9 +37,9 @@ export class ListaProductosComponent {
       id: 2,
       descripcion: 'placa base asus x470',
       disponibilidad: new Date('2025-10-02'),
-      precio: 75,
+      precio: 575,
       imagenUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl17qCBUPlMdhuJV2UNUQHJoJw2cvnZ_xwkw&s',
-      puntuacion: 4,
+      puntuacion: 5,
       imagenWidth: '70'
     }
   ];
@@ -70,5 +75,14 @@ export class ListaProductosComponent {
       this.botonFlag=true;
     }
 
+  }
+
+  onSearch(evento: any){
+      this.filtroBusqueda = evento.target.value;
+  }
+  get productosFiltrados(): IProducto[]{
+      return this.productos.filter(producto =>
+        producto.descripcion.includes(this.filtroBusqueda)
+      );
   }
 }
