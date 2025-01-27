@@ -19,10 +19,15 @@
 
         
             <td>
-                @for(estrellas of [1, 2, 3, 4, 5]; track estrellas){
+                <!--@for(estrellas of [1, 2, 3, 4, 5]; track estrellas){
                     <mat-icon [style.color]="(estrellas <= producto.puntuacion) ? 'gold' : 'gray'">
                         star</mat-icon>
-                }
+                }-->
+
+                <td>
+                    <estrellas-rating></estrellas-rating>    
+                </td>
+                
             </td>
         
     </tr>

@@ -6,7 +6,13 @@ import { FiltroProductosPipe } from '../pipes/filtro-productos.pipe';
 
 @Component({
   selector: 'ListaProductosComponent',
-  imports: [CurrencyPipe, DatePipe, MatIcon, FiltroProductosPipe],
+  imports: [
+    CurrencyPipe, 
+    DatePipe, 
+    MatIcon, 
+    FiltroProductosPipe,
+    ItemProductoComponent
+  ],
   templateUrl: './ListaProductosComponent.html',
   styleUrl: './ListaProductosComponent.scss'
 })
@@ -16,7 +22,7 @@ export class ListaProductosComponent {
   botonFlag = true;
   titulo = 'Lista de productos';
 
-  cabecera = {
+  cabeceras = {
     imagenUrl: 'imagen',
     descripcion: 'productos',
     precio: 'precio',
@@ -59,13 +65,13 @@ export class ListaProductosComponent {
     alert(this.productos[index].precio)
   }
 
-  clasesBoton = {
+  clasesPrimary = {
     'btn-primary': true,
     'btn-danger': false,
   }
 
-  clasesBotonFalse ={
-'btn-primary': false,
+  clasesDanger = {
+    'btn-primary': false,
     'btn-danger': true,
   }
 
@@ -85,5 +91,9 @@ export class ListaProductosComponent {
       return this.productos.filter(producto =>
         producto.descripcion.includes(this.filtroBusqueda)
       );
+  }
+
+  siCambiaFiltro(evento: any) {
+    this.filtroBusqueda = evento.target.value;
   }
 }
