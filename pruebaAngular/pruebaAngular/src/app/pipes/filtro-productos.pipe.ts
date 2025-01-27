@@ -6,12 +6,10 @@ import { IProducto } from '../interface/i-producto';
 })
 export class FiltroProductosPipe implements PipeTransform {
 
-  transform(arrayProductos: IProducto[], filtroParametro: string): IProducto[] {
-    return arrayProductos.filter(
-      producto =>
-        producto.descripcion.toLowerCase().includes(filtroParametro.toLowerCase())
-    );
+  transform(arrayProductos: IProducto[], filtro: string): IProducto[] {
+    return arrayProductos.filter(producto=>{
+      return producto.descripcion.toLowerCase().includes(filtro.toLowerCase());
+    });
   }
 
 }
-

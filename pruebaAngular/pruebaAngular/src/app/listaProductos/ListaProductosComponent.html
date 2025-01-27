@@ -2,6 +2,7 @@
     <div class="card-header bg-primary text-white">
         {{titulo}}
     </div>
+<<<<<<< HEAD
     <div class="card-block">
         @if(productos && productos.length){
         <div class="table-responsive">
@@ -39,6 +40,54 @@
                             [class]="{'precioPar': esPar, precioImpar : !esPar}">{{producto.precio
                             | currency:'EUR'}}</td>
                         <td>{{producto.disponibilidad | date:'dd/MM/yyyy'}}</td>
+=======
+</div>
+<div class="card-block">
+    <div class="table-responsive">
+        <label for="busquedaProductos">Búsqueda: </label>
+        <input type="text" name="busquedaProductos" id="busquedaProductos"
+            (input)="onSearch($event)">
+        @if (productos != null){
+        @if(productos.length != 0){
+        <table class="table table-stripped">
+            <thead>
+                <tr>
+                    <th><button (click)="toggleImagenes()"
+                            [class]="botonFlag? clasesBoton : clasesBotonFalse">
+                            @if(botonFlag){
+                            Mostrar
+                            } @else{
+                            Ocultar
+                            }
+
+                        </button></th>
+                    <!--<th>{{ cabecera.imagenUrl }}</th>-->
+                    <th>{{ cabecera.descripcion }}</th>
+                    <th>{{ cabecera.precio }}</th>
+                    <th>{{ cabecera.disponibilidad }}</th>
+                    <th>{{ cabecera.puntuacion }}</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!--@for(producto of productos | filtroProductos: filtroBusqueda; track producto.id; let i= $index; let esPar = $even){
+                    <item-producto></item-producto>
+                }-->
+
+                @for(producto of productos | filtroProductos: filtroBusqueda; track producto.id; let i = $index; let esPar = $even){
+                <tr>
+                    <td><img [src]="producto.imagenUrl"
+                            [width]="producto.imagenWidth"
+                            [class]="botonFlag? {'d-none': false} : {'d-none': true}"></td>
+                    <td [style]="esPar? estilosPar : estilosImpar">{{
+                        producto.descripcion }}</td>
+                    <td (click)="mostrarPrecio(i)"
+                        [class]="{'precioPar': esPar, precioImpar: !esPar}">{{
+                        producto.precio | currency:'EUR'}}</td>
+                    <td>{{ producto.disponibilidad | date:'dd/MM/yyyy' }}</td>
+
+                    
+>>>>>>> 9bb737b001004d11b72d90c0eea180b03c22faab
                         <td>
                             @for(estrella of (producto.puntuacion | estrellas); track estrella){
                             <mat-icon [style.color]="estrella.color">
