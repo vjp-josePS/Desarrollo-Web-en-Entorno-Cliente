@@ -1,96 +1,88 @@
-import { Component, OnInit , OnChanges, SimpleChanges} from '@angular/core';
+import { Component } from '@angular/core';
 import { IProducto } from '../../interfaces/i-producto';
-import { FormsModule } from '@angular/forms';
-import { CurrencyPipe } from '@angular/common';
-import { DatePipe } from '@angular/common';
-import { MatIcon } from '@angular/material/icon'
-import { FiltroProductosPipe } from '../../pipes/filtro-productos.pipe';
-import { EstrellasPipe } from '../../pipes/estrellas.pipe';
-import { ItemProductoComponent } from '../item-producto/item-producto.component';
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+
 @Component({
-  selector: 'Listaproductos',
-  imports: [FormsModule, CurrencyPipe, DatePipe, MatIcon, FiltroProductosPipe, EstrellasPipe, ItemProductoComponent],
+  selector: 'ListaProductosComponent',
+  imports: [CurrencyPipe, DatePipe, MatIcon],
   templateUrl: './ListaProductosComponent.html',
   styleUrl: './ListaProductosComponent.scss'
 })
-
-export class ListaProductosComponent implements OnInit, OnChanges{
-  filtroBusqueda='';
-  btnFlag=true;
+export class ListaProductosComponent {
+  
+  filtroBusqueda = "";
+  botonFlag = true;
   titulo = 'Lista de productos';
-  cabeceras ={
-    descripcion: "Productos",
-    precio: "Precio",
-    disponibilidad: "Disponibilidad",
-    imagen:"Imagen",
-    puntuacion:'Puntuacion'
-  };
+
+  cabecera = {
+    imagenUrl: 'imagen',
+    descripcion: 'productos',
+    precio: 'precio',
+    disponibilidad: 'disponibilidad',
+    puntuacion: 'puntuacion'
+  }
+
   productos: IProducto[] = [
     {
       id: 1,
-      descripcion: "Disco duro SSD",
-      disponibilidad: new Date('2025-02-15'),
+      descripcion: 'disco duro ssd',
+      disponibilidad: new Date('2025-02-02'),
       precio: 75,
-      imagenUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRnuuAk7JXeRBN76B-1X4RQly-fwkzhCmNdg&s",
-      puntuacion:2,
-      imageWidth: "70",
+      imagenUrl: 'https://static.fnac-static.com/multimedia/Images/ES/NR/e0/0f/15/1380320/1540-1/tsp20170822090055/Disco-duro-D-interno-Sandisk-Plus-2-5-240-GB.jpg',
+      puntuacion: 4,
+      imagenWidth: '70'
     },
     {
       id: 2,
-      descripcion: "Placa base ASUS x470",
-      disponibilidad: new Date('2025-12-15'),
-      precio: 135,
-      imagenUrl:"https://dlcdnwebimgs.asus.com/gain/E679596F-6E65-4AEF-B2EF-260309417536/w260",
-      puntuacion:3,
-      imageWidth: "70",
+      descripcion: 'placa base asus x470',
+      disponibilidad: new Date('2025-10-02'),
+      precio: 575,
+      imagenUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl17qCBUPlMdhuJV2UNUQHJoJw2cvnZ_xwkw&s',
+      puntuacion: 5,
+      imagenWidth: '70'
     }
   ];
 
-  // productosFiltrados: IProducto[] = this.productos;
-  // Sustituido por PIPE
-  // filtrarProductos(event: Event): void {
-  //   const filtroBusqueda = (event.target as HTMLInputElement).value.toLowerCase();
-  //   this.productosFiltrados = this.productos.filter(producto =>
-  //     producto.descripcion.toLowerCase().includes(filtroBusqueda)
-  //   );
-  // }
-
-  estilosPar= {
+  estilosPar = {
     'background-color': 'magenta',
-    'color': 'blue',
+    'color': 'blue'
   };
-  estilosImpar= {
-    'background-color': 'pink',
-    'color': 'red',
-  };
+
+  estilosImpar ={
+    'background-color': 'cyan',
+    'color': 'red'
+  }
 
   mostrarPrecio(index: number) {
     alert(this.productos[index].precio)
   }
 
-  clasesPrimary={
-    "btn-primary":true,
-    "btn-danger":false,
+  clasesBoton = {
+    'btn-primary': true,
+    'btn-danger': false,
   }
-  clasesDanger={
-    "btn-primary":false,
-    "btn-danger":true,
+
+  clasesBotonFalse ={
+'btn-primary': false,
+    'btn-danger': true,
   }
- 
-  togleImagenes(){
-    if(this.btnFlag){
-      this.btnFlag=false;
+
+  toggleImagenes(){
+    if(this.botonFlag){
+      this.botonFlag=false;
     } else{
-      this.btnFlag=true;
+      this.botonFlag=true;
     }
+
   }
-  siCambiaFiltro(event:any){
-    this.filtroBusqueda = event.target.value;
+
+  onSearch(evento: any){
+      this.filtroBusqueda = evento.target.value;
   }
-  ngOnInit(): void{
-    console.log('Hola, me acabo de despertar 2');
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('cambian cosas');
+  get productosFiltrados(): IProducto[]{
+      return this.productos.filter(producto =>
+        producto.descripcion.includes(this.filtroBusqueda)
+      );
   }
 }

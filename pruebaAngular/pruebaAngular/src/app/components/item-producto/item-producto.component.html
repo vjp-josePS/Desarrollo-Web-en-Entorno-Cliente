@@ -1,15 +1,1 @@
-<tr>
-    <td><img [src]="productoInput.imagenUrl"
-            [width]="productoInput.imageWidth"></td>
-    <td>{{productoInput.descripcion}}</td>
-    <td>{{productoInput.precio
-        | currency:'EUR'}}</td>
-    <td>{{productoInput.disponibilidad | date:'dd/MM/yyyy'}}</td>
-    <td>
-        @for(estrella of (productoInput.puntuacion | estrellas); track estrella){
-        <mat-icon [style.color]="estrella.color">
-            star
-        </mat-icon>
-        }
-    </td>
-</tr>
+<p>item-producto works!</p>

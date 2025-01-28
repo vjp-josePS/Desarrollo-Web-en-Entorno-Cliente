@@ -5,5 +5,5 @@ export interface IProducto {
     disponibilidad: Date;
     imagenUrl: string;
     puntuacion: number;
-    imageWidth: string;
-  }
+    imagenWidth: string
+}
