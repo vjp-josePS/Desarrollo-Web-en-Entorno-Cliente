@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ListaProductosComponent } from './listaProductos/ListaProductosComponent';
+import { ListaProductosComponent } from './components/ListaProductos/ListaProductosComponent';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ListaProductosComponent],
+  imports: [ListaProductosComponent],
   templateUrl: './app.component.html',
-  //template: '<p>hola soy {{nombre}}</p>',
   styleUrl: './app.component.scss'
 })
+
 export class AppComponent {
   title = 'Mi primera App con Angular';
-  nombre = "Jose";
 }

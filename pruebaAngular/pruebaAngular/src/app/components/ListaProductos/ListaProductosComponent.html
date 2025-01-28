@@ -1,0 +1,56 @@
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        {{titulo}}
+    </div>
+    <div class="card-block">
+        @if(productos && productos.length){
+        <div class="table-responsive">
+            <label for="busquedaProductos">Filtro Búsqueda</label>
+            <!-- <input (input)="filtrarProductos($event)" type="text" name="busquedaProductos" id="busquedaProductos"> -->
+            <input (input)="siCambiaFiltro($event)" type="text" name="busquedaProductos" nid="busquedaProductos">
+            <table class="table table-striped">
+                <thead> <tr>
+                        <th><button (click)="togleImagenes()"
+                                [class]="btnFlag? clasesPrimary : clasesDanger"
+                                id="btnimg">
+                                @if(btnFlag){
+                                Mostrar
+                                } @else{
+                                Ocultar
+                                }
+                            </button></th>
+                        <th>{{cabeceras.descripcion}}</th>
+                        <th>{{cabeceras.precio}}</th>
+                        <th>{{cabeceras.disponibilidad}}</th>
+                        <th>{{cabeceras.puntuacion}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for(producto of productos | filtroProductos: filtroBusqueda ; track producto.id; let
+                    esPar = $even; let i = $index){
+                        <item-producto [productoInput]="producto"></item-producto>
+                    <!-- <tr>
+                        <td><img [src]="producto.imagenUrl"
+                                [width]="producto.imageWidth"
+                                [class]="btnFlag? {'d-none':false} : {'d-none':true}"></td>
+                        <td
+                            [style]="esPar? estilosPar : estilosImpar">{{producto.descripcion}}</td>
+                        <td (click)="mostrarPrecio(i)"
+                            [class]="{'precioPar': esPar, precioImpar : !esPar}">{{producto.precio
+                            | currency:'EUR'}}</td>
+                        <td>{{producto.disponibilidad | date:'dd/MM/yyyy'}}</td>
+                        <td>
+                            @for(estrella of (producto.puntuacion | estrellas); track estrella){
+                            <mat-icon [style.color]="estrella.color">
+                                star
+                            </mat-icon>
+                            }
+                        </td>
+                    </tr> -->
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+    </div>
+</div>
