@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IProducto } from '../interface/i-producto';
+import { IProducto } from '../../interfaces/i-producto';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 
