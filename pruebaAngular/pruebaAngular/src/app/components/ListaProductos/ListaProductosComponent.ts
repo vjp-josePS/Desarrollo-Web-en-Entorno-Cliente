@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { IProducto } from '../interface/i-producto';
+import { IProducto } from '../../interfaces/i-producto';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
-import { FiltroProductosPipe } from '../pipes/filtro-productos.pipe';
 
 @Component({
   selector: 'ListaProductosComponent',
+<<<<<<< HEAD:pruebaAngular/pruebaAngular/src/app/listaProductos/ListaProductosComponent.ts
   imports: [
     CurrencyPipe, 
     DatePipe, 
@@ -13,6 +13,9 @@ import { FiltroProductosPipe } from '../pipes/filtro-productos.pipe';
     FiltroProductosPipe,
     ItemProductoComponent
   ],
+=======
+  imports: [CurrencyPipe, DatePipe, MatIcon],
+>>>>>>> 227f536faa10e7457b1abb1d46e720dd5f0a2d91:pruebaAngular/pruebaAngular/src/app/components/ListaProductos/ListaProductosComponent.ts
   templateUrl: './ListaProductosComponent.html',
   styleUrl: './ListaProductosComponent.scss'
 })
