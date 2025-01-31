@@ -5,7 +5,17 @@ import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'ListaProductosComponent',
+<<<<<<< HEAD:pruebaAngular/pruebaAngular/src/app/listaProductos/ListaProductosComponent.ts
+  imports: [
+    CurrencyPipe, 
+    DatePipe, 
+    MatIcon, 
+    FiltroProductosPipe,
+    ItemProductoComponent
+  ],
+=======
   imports: [CurrencyPipe, DatePipe, MatIcon],
+>>>>>>> 227f536faa10e7457b1abb1d46e720dd5f0a2d91:pruebaAngular/pruebaAngular/src/app/components/ListaProductos/ListaProductosComponent.ts
   templateUrl: './ListaProductosComponent.html',
   styleUrl: './ListaProductosComponent.scss'
 })
@@ -15,7 +25,7 @@ export class ListaProductosComponent {
   botonFlag = true;
   titulo = 'Lista de productos';
 
-  cabecera = {
+  cabeceras = {
     imagenUrl: 'imagen',
     descripcion: 'productos',
     precio: 'precio',
@@ -58,13 +68,13 @@ export class ListaProductosComponent {
     alert(this.productos[index].precio)
   }
 
-  clasesBoton = {
+  clasesPrimary = {
     'btn-primary': true,
     'btn-danger': false,
   }
 
-  clasesBotonFalse ={
-'btn-primary': false,
+  clasesDanger = {
+    'btn-primary': false,
     'btn-danger': true,
   }
 
@@ -84,5 +94,9 @@ export class ListaProductosComponent {
       return this.productos.filter(producto =>
         producto.descripcion.includes(this.filtroBusqueda)
       );
+  }
+
+  siCambiaFiltro(evento: any) {
+    this.filtroBusqueda = evento.target.value;
   }
 }

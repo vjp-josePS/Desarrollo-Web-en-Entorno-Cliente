@@ -1,1 +1,40 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <tr>
+        <td><img [src]="producto.imagenUrl"
+                [width]="producto.imagenWidth"
+                [class]="botonFlag? {'d-none': false} : {'d-none': true}"></td>
+        <td [style]="esPar? estilosPar : estilosImpar">{{
+            producto.descripcion }}</td>
+        <td (click)="mostrarPrecio(i)"
+            [class]="{'precioPar': esPar, precioImpar: !esPar}">{{
+            producto.precio | currency:'EUR'}}</td>
+        <td>{{ producto.disponibilidad | date:'dd/MM/yyyy' }}</td>
+
+        
+            <td>
+                <!--@for(estrellas of [1, 2, 3, 4, 5]; track estrellas){
+                    <mat-icon [style.color]="(estrellas <= producto.puntuacion) ? 'gold' : 'gray'">
+                        star</mat-icon>
+                }-->
+
+                <td>
+                    <estrellas-rating></estrellas-rating>    
+                </td>
+                
+            </td>
+        
+    </tr>
+</body>
+</html>
+
+=======
 <p>item-producto works!</p>
+>>>>>>> 227f536faa10e7457b1abb1d46e720dd5f0a2d91
