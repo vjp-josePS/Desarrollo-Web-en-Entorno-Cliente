@@ -45,6 +45,7 @@
                         producto.precio | currency:'EUR'}}</td>
                     <td>{{ producto.disponibilidad | date:'dd/MM/yyyy' }}</td>
 
+<<<<<<< HEAD
                     <td>
                         @for(estrella of (producto.puntuacion | estrellas);
                         track estrella){
@@ -54,11 +55,25 @@
                         }
                     </td>
 
+=======
+                    
+                        <td>
+                            @for(estrellas of [1, 2, 3, 4, 5]; track estrellas){
+                                <mat-icon [style.color]="(estrellas <= producto.puntuacion) ? 'gold' : 'gray'">
+                                    star</mat-icon>
+                            }
+                        </td>
+                    
+>>>>>>> f42f53a2151caa79fbcd22526b86cb777ec719c2
                 </tr>
                 }
             </tbody>
         </table>
         }
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f42f53a2151caa79fbcd22526b86cb777ec719c2
     </div>
 </div>

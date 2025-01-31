@@ -15,7 +15,7 @@ export class ListaProductosComponent {
   botonFlag = true;
   titulo = 'Lista de productos';
 
-  cabeceras = {
+  cabecera = {
     imagenUrl: 'imagen',
     descripcion: 'productos',
     precio: 'precio',
@@ -58,13 +58,13 @@ export class ListaProductosComponent {
     alert(this.productos[index].precio)
   }
 
-  clasesPrimary = {
+  clasesBoton = {
     'btn-primary': true,
     'btn-danger': false,
   }
 
-  clasesDanger = {
-    'btn-primary': false,
+  clasesBotonFalse ={
+'btn-primary': false,
     'btn-danger': true,
   }
 
@@ -84,9 +84,5 @@ export class ListaProductosComponent {
       return this.productos.filter(producto =>
         producto.descripcion.includes(this.filtroBusqueda)
       );
-  }
-
-  siCambiaFiltro(evento: any) {
-    this.filtroBusqueda = evento.target.value;
   }
 }
