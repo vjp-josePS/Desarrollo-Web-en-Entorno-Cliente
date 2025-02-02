@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { IProducto } from '../../interfaces/i-producto';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
@@ -11,8 +12,7 @@ import { EstrellasPipe } from '../../pipes/estrellas.pipe';
   styleUrl: './ListaProductosComponent.scss',
   standalone: true
 })
-export class ListaProductosComponent {
-  
+export class ListaProductosComponent implements OnInit {
   filtroBusqueda = "";
   botonFlag = true;
   titulo = 'Lista de productos';
@@ -25,7 +25,29 @@ export class ListaProductosComponent {
     puntuacion: 'puntuacion'
   }
 
-  productos: IProducto[] = [
+  productos: IProducto[] = [];
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.cargarProductos();
+  }
+
+  cargarProductos() {
+    this.http.get<{productos: IProducto[]}>('../../../assets/productos.json').subscribe(
+      data => {
+        this.productos = data.productos.map(producto => ({
+          ...producto,
+          disponibilidad: new Date(producto.disponibilidad)
+        }));
+      },
+      error => {
+        console.error('Error al cargar los productos:', error);
+      }
+    );
+  }
+
+  producto: IProducto[] = [
     
   ];
 
@@ -65,9 +87,9 @@ export class ListaProductosComponent {
   onSearch(evento: any){
       this.filtroBusqueda = evento.target.value;
   }
-  get productosFiltrados(): IProducto[]{
-      return this.productos.filter(producto =>
-        producto.descripcion.includes(this.filtroBusqueda)
-      );
+  get productosFiltrados(): IProducto[] {
+    return this.productos.filter(producto =>
+      producto.descripcion.toLowerCase().includes(this.filtroBusqueda.toLowerCase())
+    );
   }
 }

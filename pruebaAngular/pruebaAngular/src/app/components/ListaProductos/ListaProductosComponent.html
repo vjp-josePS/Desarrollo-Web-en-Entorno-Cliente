@@ -46,11 +46,11 @@
                     <td>{{ producto.disponibilidad | date:'dd/MM/yyyy' }}</td>
 
                     
-                        <td>
-                            @for(estrella of producto.puntuacion | estrellas; track estrella.indice) {
-                                <mat-icon [style.color]="estrella.color">star</mat-icon>
-                              }
-                        </td>
+                    <td>
+                        @for(estrella of producto.puntuacion | estrellas; track estrella.indice) {
+                          <mat-icon [style.color]="estrella.color">star</mat-icon>
+                        }
+                      </td>
                 </tr>
                 }
             </tbody>
