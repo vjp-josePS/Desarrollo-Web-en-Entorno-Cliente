@@ -11,6 +11,7 @@ interface IEstrella {
 // Decorador que define el pipe y lo marca como standalone
 @Pipe({
   name: 'estrellas',
+  standalone: true
 })
 export class EstrellasPipe implements PipeTransform {
   // Método transform que convierte una puntuación numérica en un array de estrellas

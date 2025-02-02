@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { IProducto } from '../../interfaces/i-producto';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
+import { EstrellasPipe } from '../../pipes/estrellas.pipe';
 
 @Component({
   selector: 'ListaProductosComponent',
-  imports: [CurrencyPipe, DatePipe, MatIcon],
+  imports: [CurrencyPipe, DatePipe, MatIcon, EstrellasPipe],
   templateUrl: './ListaProductosComponent.html',
-  styleUrl: './ListaProductosComponent.scss'
+  styleUrl: './ListaProductosComponent.scss',
+  standalone: true
 })
 export class ListaProductosComponent {
   

@@ -47,12 +47,10 @@
 
                     
                         <td>
-                            @for(estrellas of [1, 2, 3, 4, 5]; track estrellas){
-                                <mat-icon [style.color]="(estrellas <= producto.puntuacion) ? 'gold' : 'gray'">
-                                    star</mat-icon>
-                            }
+                            @for(estrella of producto.puntuacion | estrellas; track estrella.indice) {
+                                <mat-icon [style.color]="estrella.color">star</mat-icon>
+                              }
                         </td>
-                    
                 </tr>
                 }
             </tbody>
