@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { AreaSeleccionComponent } from './area-seleccion/area-seleccion.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [CommonModule, AreaSeleccionComponent],
+  template: `
+    <h1>Street Fighter</h1>
+    <app-area-seleccion></app-area-seleccion>
+  `,
+  styles: []
 })
 export class AppComponent {
-  title = 'street-fighter';
+  title = 'Street Fighter';
 }
