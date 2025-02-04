@@ -4,9 +4,9 @@ import { ListaProductosComponent } from './components/ListaProductos/ListaProduc
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet, ListaProductosComponent],
   templateUrl: './app.component.html',
-  //template: '<p>hola soy {{nombre}}</p>',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
