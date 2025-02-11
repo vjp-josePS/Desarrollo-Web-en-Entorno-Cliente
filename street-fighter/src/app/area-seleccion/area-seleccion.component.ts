@@ -9,8 +9,8 @@ import { AtributosLuchadorComponent } from '../atributos-luchador/atributos-luch
   selector: 'app-area-seleccion', // Selector para usar este componente en otros templates
   standalone: true, // Indica que es un componente independiente (Angular 14+)
   imports: [CommonModule, RetratoLuchadorComponent, AtributosLuchadorComponent], // Importa los módulos y componentes que usa este componente
-  templateUrl: './area-seleccion.component.html', // Define la ruta al archivo HTML del template
-  styleUrls: ['./area-seleccion.component.css'] // Define la ruta al archivo CSS de estilos
+  templateUrl: './area-seleccion.component.html', // Definimos la ruta al archivo HTML del template
+  styleUrls: ['./area-seleccion.component.css'] // Definimos la ruta al archivo CSS de estilos
 })
 export class AreaSeleccionComponent implements OnInit { // Clase del componente
   luchadores: ILuchador[] = []; // Array para almacenar la lista de luchadores (tipo ILuchador)

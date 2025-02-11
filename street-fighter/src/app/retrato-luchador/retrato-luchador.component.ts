@@ -6,8 +6,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-retrato-luchador', // Selector para usar este componente en otros templates
   standalone: true, // Indica que es un componente independiente
   imports: [CommonModule], // Importa los módulos que usa este componente
-  templateUrl: './retrato-luchador.component.html', // Define la ruta al archivo HTML del template
-  styleUrls: ['./retrato-luchador.component.css'] // Define la ruta al archivo CSS de estilos
+  templateUrl: './retrato-luchador.component.html', // Definimos la ruta al archivo HTML del template
+  styleUrls: ['./retrato-luchador.component.css'] // Definimos la ruta al archivo CSS de estilos
 })
 export class RetratoLuchadorComponent { // Clase del componente
   @Input() luchador!: ILuchador; // Recibe el objeto luchador como entrada

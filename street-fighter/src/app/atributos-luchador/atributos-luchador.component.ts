@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
       
     </div>
   `,
-  styleUrls: ['./atributos-luchador.component.css'], // Define la ruta al archivo CSS de estilos
+  styleUrls: ['./atributos-luchador.component.css'], // Definimos la ruta al archivo CSS de estilos
   imports: [CommonModule] // Importa los módulos que usa este componente
 })
 export class AtributosLuchadorComponent { // Clase del componente

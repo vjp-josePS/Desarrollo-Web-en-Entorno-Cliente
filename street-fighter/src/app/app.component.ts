@@ -7,8 +7,8 @@ import { AreaSeleccionComponent } from './area-seleccion/area-seleccion.componen
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet, AreaSeleccionComponent],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html', // Definimos la ruta al archivo HTML del template
+  styleUrls: ['./app.component.css'] // Definimos la ruta al archivo CSS de estilos
 })
 export class AppComponent {
   title = 'Street Fighter';
