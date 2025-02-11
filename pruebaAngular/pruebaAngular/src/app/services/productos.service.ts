@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { IProducto } from '../interfaces/i-producto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductosService {
-  private productosUrl = '../../../assets/productos.json';
-
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
 
   getProductos(): Observable<IProducto[]> {
-    return this.http.get<IProducto[]>(this.productosUrl);
+    return this.http.get<{productos: IProducto[]}>('../../assets/productos.json')
+      .pipe(
+        map(response => response.productos)
+      );
   }
 }

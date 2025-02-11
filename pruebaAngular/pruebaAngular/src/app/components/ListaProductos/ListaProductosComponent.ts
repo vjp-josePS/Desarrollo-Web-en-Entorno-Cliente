@@ -1,12 +1,11 @@
-import { Component, OnInit, signal, computed } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { IProducto } from '../../interfaces/i-producto';
+import { Component, OnInit, inject, signal, computed, ChangeDetectionStrategy  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { EstrellasPipe } from '../../pipes/estrellas.pipe';
 import { FiltroProductosPipe } from '../../pipes/filtro-productos.pipe';
 import { ItemProductoComponent } from '../item-producto/item-producto.component';
 import { ProductosService } from '../../services/productos.service';
+import { IProducto } from '../../interfaces/i-producto';
 
 @Component({
   selector: 'app-lista-productos',
@@ -19,12 +18,17 @@ import { ProductosService } from '../../services/productos.service';
     ItemProductoComponent
   ],
   templateUrl: './ListaProductosComponent.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./ListaProductosComponent.scss']
 })
 export class ListaProductosComponent implements OnInit {
+  
   filtroBusqueda = signal("");
   botonFlag = signal(true);
-  titulo = 'Lista de productos';
+  titulo = "Lista de productos";
+
+  productos = signal<IProducto[]>([]);
+
 
   cabecera = {
     imagenUrl: 'imagen',
@@ -34,15 +38,15 @@ export class ListaProductosComponent implements OnInit {
     puntuacion: 'puntuacion'
   };
 
-  productos = signal<IProducto[]>([]);
-
   productosFiltrados = computed(() => 
     this.productos().filter(producto =>
       producto.descripcion.toLowerCase().includes(this.filtroBusqueda().toLowerCase())
     )
   );
 
-  constructor(private productosService: ProductosService) {}
+  private productosService = inject(ProductosService);
+  constructor() {}
+
 
   ngOnInit() {
     this.cargarProductos();
@@ -50,8 +54,8 @@ export class ListaProductosComponent implements OnInit {
 
   cargarProductos() {
     this.productosService.getProductos().subscribe({
-      next: (data) => {
-        this.productos.set(data.map(producto => ({
+      next: (productos) => {
+        this.productos.set(productos.map(producto => ({
           ...producto,
           disponibilidad: new Date(producto.disponibilidad)
         })));
@@ -89,7 +93,7 @@ export class ListaProductosComponent implements OnInit {
   toggleImagenes() {
     this.botonFlag.update(v => !v);
   }
-
+  
   onSearch(evento: any) {
     this.filtroBusqueda.set(evento.target.value);
   }

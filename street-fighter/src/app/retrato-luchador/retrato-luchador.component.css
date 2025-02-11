@@ -1,0 +1,16 @@
+.card {
+  display: flex;
+  /* Para centrar el contenido */
+  justify-content: center;
+  align-items: center;
+  width: 100px; /* Ajusto el ancho */
+  height: 100px; /* Ajusto el alto */
+  border: 2px solid black;
+  border-radius: 0; /* Elimino el borde redondeado */
+  padding: 0px; /*Elimino el padding */
+}
+
+.card-img-top {
+
+  border-radius: 0px; /*Elimino el border radius */
+}

@@ -1,0 +1,11 @@
+<div 
+  class="card p-1 p-0"
+  [style.border-color]="getBorderColor()"
+  [class.border-3]="indiceSeleccionado === numLuchador"
+  [class.enfocado]="estaEnfocado"
+  (click)="onSeleccionar()">
+  <img 
+    [src]="luchador.retrato" 
+    [alt]="luchador.nombre" 
+    class="card-img-top">
+</div>

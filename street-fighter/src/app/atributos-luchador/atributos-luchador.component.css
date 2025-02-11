@@ -1,0 +1,37 @@
+.atributo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.barra-atributo {
+  position: relative; /* Necesario para posicionar el nombre del atributo */
+  background-color: #4c4c4c; /* Color del fondo que no tiene valor */
+
+  /* Altura y largo de la barra */
+  height: 50px;
+  width: 300px;
+  border: 5px solid white;
+}
+
+.nombre-atributo {
+  position: absolute; /* Posiciona el nombre dentro de la barra */
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta el centro exacto */
+  color: white; /* Color del texto */
+  font-size: 20px; /* Tamaño del texto */
+  font-weight: bold; /* Hace el texto más legible */
+  z-index: 1; /* Asegura que el texto esté por encima de la barra */
+}
+
+.valor {
+  height: 100%;
+  background: linear-gradient(to right, red, yellow, green);
+  
+  position: absolute; /* Asegura que la barra esté detrás del texto */
+  left: 0;
+  top: 0;
+  z-index: 0; /* Asegura que la barra esté detrás del texto */
+}

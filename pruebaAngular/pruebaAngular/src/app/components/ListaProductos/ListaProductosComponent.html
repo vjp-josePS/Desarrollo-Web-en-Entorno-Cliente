@@ -29,12 +29,11 @@
             </thead>
 
             <tbody>
-                @for(producto of productosFiltrados() | filtroProductos: filtroBusqueda(); track producto.id; let i =
-                $index; let esPar = $even) {
-                <tr app-item-producto [producto]="producto" [verImagenes]="botonFlag()"
-                    (productoClicked)="onProductoClicked($event)">
-                </tr>
-                }
+                @for(producto of productosFiltrados(); track producto.id; let i = $index; let esPar = $even) {
+                    <tr app-item-producto [producto]="producto" [verImagenes]="botonFlag()"
+                        (productoClicked)="onProductoClicked($event)">
+                    </tr>
+                  }
             </tbody>
         </table>
         }
