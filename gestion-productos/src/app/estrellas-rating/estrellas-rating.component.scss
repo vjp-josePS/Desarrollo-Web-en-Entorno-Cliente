@@ -1,0 +1,12 @@
+.estrellas {
+    span {
+      cursor: pointer;
+      font-size: 2em;
+      color: lightgray;
+  
+      &.active {
+        color: gold;
+      }
+    }
+  }
+  
