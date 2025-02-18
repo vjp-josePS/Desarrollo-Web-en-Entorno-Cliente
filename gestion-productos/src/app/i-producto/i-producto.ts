@@ -1,8 +1,8 @@
 export interface IProducto {
-    id: number;
-    descripcion: string;
-    disponibilidad: Date;
-    precio: number;
-    imagenUrl: string;
-    puntuacion: number;
-  }
+  id: number;
+  descripcion: string;
+  precio: number;
+  disponibilidad: Date;
+  puntuacion: number;
+  imagenUrl: string;
+}

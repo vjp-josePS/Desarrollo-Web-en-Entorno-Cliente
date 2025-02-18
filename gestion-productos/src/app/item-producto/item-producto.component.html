@@ -1,1 +1,19 @@
-<p>item-producto works!</p>
+@if (producto) {
+    <td>
+        @if (mostrarImagenes) {
+        <img [src]="producto.imagenUrl" alt="{{ producto.descripcion }}" height="100">
+        }
+    </td>
+    <td><a [routerLink]="['/productos', producto.id]">{{ producto.descripcion }}</a></td>
+    <td>{{ producto.precio | currency:'EUR' }}</td>
+    <td>{{ producto.disponibilidad | date:'dd/MM/yyyy' }}</td>
+    <td [title]="producto.puntuacion">
+        @for (i of [1, 2, 3, 4, 5]; track i) {
+          <span (click)="onEstrellaClick(i)" 
+                class="fa-star text-warning"
+                [class.fas]="i <= producto.puntuacion"
+                [class.far]="i > producto.puntuacion">
+          </span>
+        }
+    </td>
+}

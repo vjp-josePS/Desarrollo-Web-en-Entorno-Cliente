@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-bienvenida',
   imports: [],
   templateUrl: './bienvenida.component.html',
-  styles: ``
+  styleUrl: './bienvenida.component.scss'
 })
 export class BienvenidaComponent {
 

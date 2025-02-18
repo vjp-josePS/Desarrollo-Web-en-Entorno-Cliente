@@ -1,1 +1,37 @@
-<p>lista-productos works!</p>
+<h2>Lista de Productos</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Buscar productos" [(ngModel)]="filtro">
+                
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                  <div class="input-group-append">
+                    <button class="btn" 
+                            [ngClass]="{'btn-primary': mostrarImagenes, 'btn-danger': !mostrarImagenes}"
+                            type="button" (click)="toggleImagenes()">
+                        {{ mostrarImagenes ? 'Ocultar' : 'Mostrar' }}
+                    </button>
+                </div>
+                </th>
+                <th>Productos</th>
+                <th>Precio</th>
+                <th>Disponibilidad</th>
+                <th>Puntuación</th>
+            </tr>
+        </thead>
+        <tbody>
+          @for (producto of productos | filtroProductos: filtro; track producto.id) {
+          <tr item-producto [producto]="producto" [mostrarImagenes]="mostrarImagenes"
+              (numEstrellasCambiadas)="cambioEstrellas(producto, $event)"></tr>
+          }
+      </tbody>
+      
+    </table>
+</div>

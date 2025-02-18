@@ -1,83 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { CargaProductoService } from '../carga-producto.service';
-import { IProducto } from '../i-producto/i-producto';
 import { CommonModule } from '@angular/common';
-// import { ItemProductoComponent } from '../item-producto/item-producto.component';
-import { RouterLink } from '@angular/router';
-import { EstrellasRatingComponent } from '../estrellas-rating/estrellas-rating.component';
+import { FormsModule } from '@angular/forms';
+import { FiltroProductosPipe } from '../pipes/filtro-productos.pipe';
+import { ItemProductoComponent } from '../item-producto/item-producto.component';
+import { IProducto } from '../i-producto/i-producto';
+import { ProductoService } from '../producto.service';
 
 @Component({
-  selector: 'app-lista-productos',
-  standalone: true,
-  imports: [CommonModule, /*ItemProductoComponent,*/ RouterLink, EstrellasRatingComponent],
-  template: `
-    <h2>Lista de Productos</h2>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Búsqueda">
-
-          </div>
-        </div>
-      </div>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>
-              <div class="input-group-append">
-                <button class="btn btn-danger" type="button" (click)="toggleImagenes()">
-                  {{ mostrarImagenes ? 'Ocultar' : 'Mostrar' }}
-                </button>
-              </div>
-            </th>
-            <th>Productos</th>
-            <th>Precio</th>
-            <th>Disponibilidad</th>
-            <th>Puntuación</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (producto of productos; track producto.id) {
-            <tr>
-              <td>
-                @if (mostrarImagenes) {
-                  <img [src]="producto.imagenUrl" alt="{{ producto.descripcion }}" width="50">
-                }
-              </td>
-              <td><a [routerLink]="['/productos', producto.id]">{{ producto.descripcion }}</a></td>
-              <td>{{ producto.precio | currency:'EUR' }}</td>
-              <td>{{ producto.disponibilidad | date:'dd/MM/yyyy' }}</td>
-              <td><app-estrellas-rating [numEstrellas]="producto.puntuacion" (numEstrellasCambiadas)="cambioEstrellas(producto, $event)"></app-estrellas-rating></td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
-  `,
+    selector: 'app-lista-productos',
+    standalone: true,
+    imports: [CommonModule, FormsModule, ItemProductoComponent, FiltroProductosPipe],
+    templateUrl: './lista-productos.component.html',
 })
 export class ListaProductosComponent implements OnInit {
-  productos: IProducto[] | undefined;
-  mostrarImagenes: boolean = true;
+    productos: IProducto[] = [];
+    mostrarImagenes: boolean = true;
+    filtro: string = '';
+    mensajeError: string = '';
 
-  constructor(private cargaProductoService: CargaProductoService) { }
+    constructor(private productoService: ProductoService) { }
 
-  ngOnInit(): void {
-    this.cargaProductoService.getProductos().subscribe({
-      next: listaProductos => this.productos = listaProductos,
-      error: error => console.log(error)
-    });
-  }
+    ngOnInit(): void {
+        this.productos = this.productoService.getProductos();
+    }
 
-  cambioEstrellas(producto: IProducto, nuevaPuntuacion: number): void {
-    producto.puntuacion = nuevaPuntuacion;
-    this.cargaProductoService.guardarProducto(producto).subscribe({
-      next: p => console.log(`Actualizado el producto ${p}`),
-      error: error => console.log(error)
-    });
-  }
+    cambioEstrellas(producto: IProducto, nuevaPuntuacion: number): void {
+        // Clonar el producto para evitar la modificación directa
+        const productoActualizado = { ...producto, puntuacion: nuevaPuntuacion };
+        // Encontrar el índice del producto a actualizar
+        const index = this.productos.findIndex(p => p.id === producto.id);
+        // Si el producto se encuentra, actualizarlo
+        if (index !== -1) {
+            this.productos[index] = productoActualizado;
+        } else {
+            console.warn(`Producto con ID ${producto.id} no encontrado`);
+        }
+    }
 
-  toggleImagenes(): void {
-    this.mostrarImagenes = !this.mostrarImagenes;
-  }
+    toggleImagenes(): void {
+        this.mostrarImagenes = !this.mostrarImagenes;
+    }
 }
