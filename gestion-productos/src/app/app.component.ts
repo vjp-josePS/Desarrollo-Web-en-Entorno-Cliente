@@ -11,5 +11,5 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'gestion-productos';
+  title = 'Mi Primera App con Angular';
 }
