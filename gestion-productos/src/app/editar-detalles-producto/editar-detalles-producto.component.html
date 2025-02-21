@@ -1,33 +1,94 @@
 <div class="container">
-    <h2>Editar Detalles del Producto</h2>
-    @if (producto) {
-      <form>
-        <div class="form-group">
-            <br>
+  <h2>Editar Detalles del Producto</h2>
+  @if (producto) {
+  <form #productForm="ngForm">
+      <div class="form-group">
+          <br>
           <label for="descripcion">Descripción:</label>
-          <input type="text" class="form-control" id="descripcion" [(ngModel)]="producto.descripcion" name="descripcion">
-        </div>
-        <div class="form-group">
-            <br>
+          <textarea class="form-control" id="descripcion" [(ngModel)]="producto.descripcion" name="descripcion"
+              required minlength="3" maxlength="500"></textarea>
+          <div *ngIf="productForm.controls['descripcion']?.invalid && productForm.controls['descripcion']?.touched"
+              class="text-danger">
+              <small *ngIf="productForm.controls['descripcion']?.errors?.['required']">
+                  Campo obligatorio
+              </small>
+              <small *ngIf="productForm.controls['descripcion']?.errors?.['minlength']">
+                  Mínimo 3 caracteres
+              </small>
+              <small *ngIf="productForm.controls['descripcion']?.errors?.['maxlength']">
+                  Máximo 500 caracteres (aproximadamente 50 palabras)
+              </small>
+          </div>
+      </div>
+      <div class="form-group">
+          <br>
           <label for="precio">Precio:</label>
-          <input type="number" class="form-control" id="precio" [(ngModel)]="producto.precio" name="precio">
-        </div>
-        <div class="form-group">
-            <br>
+          <input type="number" class="form-control" id="precio" [(ngModel)]="producto.precio" name="precio"
+              required pattern="^[0-9]+(\.[0-9]{1,2})?$">
+          <div *ngIf="productForm.controls['precio']?.invalid && productForm.controls['precio']?.touched"
+              class="text-danger">
+              <small *ngIf="productForm.controls['precio']?.errors?.['required']">
+                  Campo obligatorio
+              </small>
+              <small *ngIf="productForm.controls['precio']?.errors?.['pattern']">
+                  Debe ser un número válido
+              </small>
+          </div>
+      </div>
+      <div class="form-group">
+          <br>
           <label for="disponibilidad">Disponibilidad:</label>
-          <input type="date" class="form-control" id="disponibilidad" [(ngModel)]="producto.disponibilidad" name="disponibilidad">
+          <input type="date" class="form-control" id="disponibilidad" [(ngModel)]="producto.disponibilidad"
+              name="disponibilidad" required [min]="minDate">
+          <div *ngIf="productForm.controls['disponibilidad']?.invalid && productForm.controls['disponibilidad']?.touched"
+              class="text-danger">
+              <small *ngIf="productForm.controls['disponibilidad']?.errors?.['required']">
+                  Campo obligatorio
+              </small>
+              <small *ngIf="productForm.controls['disponibilidad']?.errors?.['min']">
+                  La fecha no puede ser anterior a hoy
+              </small>
+          </div>
+      </div>
+      <div class="form-group">
+          <br>
+          <label for="puntuacion">Puntuación (1-5):</label>
+          <input type="number" class="form-control" id="puntuacion" [(ngModel)]="producto.puntuacion"
+              name="puntuacion" required min="1" max="5">
+          <div *ngIf="productForm.controls['puntuacion']?.invalid && productForm.controls['puntuacion']?.touched"
+              class="text-danger">
+              <small *ngIf="productForm.controls['puntuacion']?.errors?.['required']">
+                  Campo obligatorio
+              </small>
+              <small *ngIf="productForm.controls['puntuacion']?.errors?.['min']">
+                  La puntuación debe ser al menos 1
+              </small>
+              <small *ngIf="productForm.controls['puntuacion']?.errors?.['max']">
+                  La puntuación debe ser como máximo 5
+              </small>
+          </div>
+      </div>
+      <div class="form-group">
+        <br>
+        <label for="imagen">Imagen del producto:</label>
+        <input type="file" class="form-control" id="imagen" name="imagen" (change)="onFileSelected($event)" accept="image/*">
+        <div *ngIf="productForm.controls['imagen']?.invalid && productForm.controls['imagen']?.touched"
+            class="text-danger">
+            <small *ngIf="productForm.controls['imagen']?.errors?.['required']">
+                Campo obligatorio
+            </small>
         </div>
-        <div class="form-group">
-            <br>
-          <label for="puntuacion">Puntuación:</label>
-          <input type="number" class="form-control" id="puntuacion" [(ngModel)]="producto.puntuacion" name="puntuacion">
+        <div *ngIf="producto.imagenUrl">
+            <img [src]="producto.imagenUrl" alt="Imagen actual" style="max-width: 100px; max-height: 100px;">
         </div>
-        <button type="button" class="btn btn-danger m-4" (click)="cancelarEdicion()">Cancelar</button>
-        <button type="button" class="btn btn-warning m-4" (click)="guardarCambios()">Guardar</button>
-        
-      </form>
-    } @else {
-      <p>Producto no encontrado</p>
-    }
-  </div>
-  
+    </div>
+      <button type="button" class="btn btn-danger m-4" (click)="cancelarEdicion()"
+          [disabled]="!productForm.dirty">Cancelar</button>
+      <button type="button" class="btn btn-warning m-4" (click)="guardarCambios()"
+          [disabled]="!productForm.valid">Guardar</button>
+
+  </form>
+  } @else {
+  <p>Producto no encontrado</p>
+  }
+</div>
