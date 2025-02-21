@@ -6,7 +6,7 @@
       "disponibilidad": "2024-01-01T00:00:00.000Z",
       "precio": 75,
       "imagenUrl": "assets/img/disco_duro.jpg",
-      "puntuacion": 3
+      "puntuacion": 2
     },
     {
       "id": "2",
@@ -14,7 +14,7 @@
       "disponibilidad": "2024-02-15T00:00:00.000Z",
       "precio": 120,
       "imagenUrl": "assets/img/placa_base.jpg",
-      "puntuacion": 3
+      "puntuacion": 4
     }
   ]
 }
