@@ -1,22 +1,23 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-atributos-luchador', // Selector para usar este componente en otros templates
-  standalone: true, // Indica que es un componente independiente
-  template: `
-    <div class="atributo">
-      <div class="barra-atributo">
-        <span class="nombre-atributo">{{ nombreAtributo }}</span>
-        <div class="valor" [style.width.%]="valorAtributo * 10"></div>
-      </div>
-      
-    </div>
-  `,
-  styleUrls: ['./atributos-luchador.component.css'], // Definimos la ruta al archivo CSS de estilos
-  imports: [CommonModule] // Importa los módulos que usa este componente
+  selector: 'app-atributos-luchador',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './atributos-luchador.component.html',
+  styleUrls: ['./atributos-luchador.component.css']
 })
-export class AtributosLuchadorComponent { // Clase del componente
-  @Input() nombreAtributo!: string; // Recibe el nombre del atributo como entrada
-  @Input() valorAtributo!: number; // Recibe el valor del atributo como entrada
+export class AtributosLuchadorComponent implements OnChanges {
+  @Input() nombreAtributo!: string;
+  @Input() valorAtributo!: number;
+
+  clipPath: string = 'inset(0 0 0 0)';
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['valorAtributo']) {
+      const porcentaje = this.valorAtributo * 10;
+      this.clipPath = `inset(0 ${100 - porcentaje}% 0 0)`;
+    }
+  }
 }

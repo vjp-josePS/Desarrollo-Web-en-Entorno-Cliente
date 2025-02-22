@@ -1,18 +1,8 @@
-<!-- Contenedor principal que usa flexbox para centrar todo el contenido -->
 <div class="container-fluid d-flex justify-content-center align-items-center">
-
   <!-- Sección Izquierda: Grid de retratos de luchadores -->
   <div class="col-2 d-flex flex-wrap justify-content-center align-items-center gap-2">
-    <!-- Directiva @for que itera sobre el array de luchadores
-           - track: usa el nombre del luchador como identificador único
-           - i: variable que almacena el índice actual -->
     @for (luchador of luchadores; track luchador.nombre; let i = $index) {
     <div class="retrato-container">
-      <!-- Componente que muestra el retrato de cada luchador
-               - [luchador]: pasa el objeto luchador actual
-               - [numLuchador]: pasa el índice actual
-               - [indiceSeleccionado]: indica el luchador actualmente seleccionado
-               - (seleccionado): evento que se dispara al hacer clic en un luchador -->
       <app-retrato-luchador [luchador]="luchador" [numLuchador]="i" [indiceSeleccionado]="indiceSeleccionado"
         (seleccionado)="seleccionarLuchador($event)">
       </app-retrato-luchador>
@@ -22,7 +12,6 @@
 
   <!-- Sección Central: Animación del luchador seleccionado -->
   <div class="col-6 d-flex justify-content-center align-items-center">
-    <!-- Directiva @if que solo muestra la animación si hay un luchador seleccionado (índice != -1) -->
     @if (indiceSeleccionado !== -1) {
     <img [src]="luchadores[indiceSeleccionado].animacion" alt="Animación" class="img-fluid">
     }
@@ -30,7 +19,6 @@
 
   <!-- Sección Derecha: Información y estadísticas del luchador -->
   <div class="col-3 d-flex flex-column justify-content-center align-items-center">
-    <!-- Solo muestra la información si hay un luchador seleccionado -->
     @if (indiceSeleccionado !== -1) {
     <!-- Nombre del luchador -->
     <h2 class="text-white">{{ luchadores[indiceSeleccionado].nombre }}</h2>
@@ -45,6 +33,7 @@
       [valorAtributo]="luchadores[indiceSeleccionado].destreza"></app-atributos-luchador>
     <app-atributos-luchador nombreAtributo="Vida" [valorAtributo]="luchadores[indiceSeleccionado].vida">
     </app-atributos-luchador>
+    <button (click)="seleccionarYLuchar()" class="btn btn-dark mt-2" style="width: 300px;">Seleccionar</button>
     }
   </div>
 </div>

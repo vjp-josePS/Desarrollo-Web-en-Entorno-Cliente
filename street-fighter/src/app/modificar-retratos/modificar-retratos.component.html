@@ -1,0 +1,7 @@
+<div class="container">
+    <h2>Modificar Retratos</h2>
+    @for (luchador of luchadores; track luchador.nombre) {
+      <app-edit-retrato [luchador]="luchador"></app-edit-retrato>
+    }
+  </div>
+  

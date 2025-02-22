@@ -20,16 +20,10 @@ export class RetratoLuchadorComponent { // Clase del componente
     this.seleccionado.emit(this.numLuchador); // Emite el evento 'seleccionado' con el número del luchador
   }
 
-  getBorderColor(): string { // Método para obtener el color del borde
-    if (this.indiceSeleccionado === this.numLuchador) { // Si el luchador está seleccionado
-      switch (this.numLuchador) { // Evalúa el número del luchador
-        case 0: return 'green'; // Si es el luchador 0, devuelve verde
-        case 1: return 'blue'; // Si es el luchador 1, devuelve azul
-        case 2: return 'red'; // Si es el luchador 2, devuelve rojo
-        case 3: return 'yellow'; // Si es el luchador 3, devuelve amarillo
-        default: return 'black'; // Si no es ninguno de los anteriores, devuelve negro
-      }
+  getBorderColor(): string {
+    if (this.indiceSeleccionado === this.numLuchador) {
+      return this.luchador.colorAsociado; // Devuelve el colorAsociado del luchador
     }
-    return ''; // Si el luchador no está seleccionado, devuelve una cadena vacía
+    return '';
   }
 }

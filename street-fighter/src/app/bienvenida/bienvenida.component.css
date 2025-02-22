@@ -1,0 +1,14 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align content to the bottom */
+    align-items: center;
+    height: 90%;
+    width: 100%;
+  }
+  
+  img{
+      height: 320px;
+      border-radius: 20px;
+  }
+  
