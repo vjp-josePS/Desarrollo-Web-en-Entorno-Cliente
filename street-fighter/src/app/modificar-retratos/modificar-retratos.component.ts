@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { EditRetratoComponent } from '../edit-retrato/edit-retrato.component';
 import { ILuchador } from '../interfaces/luchador.interface';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { EditRetratoComponent } from '../edit-retrato/edit-retrato.component'; // Importa EditRetratoComponent
 
 @Component({
   selector: 'app-modificar-retratos',
   standalone: true,
-  imports: [CommonModule, EditRetratoComponent], // Agrega EditRetratoComponent a la lista de imports
+  imports: [CommonModule, EditRetratoComponent],
   templateUrl: './modificar-retratos.component.html',
   styleUrls: ['./modificar-retratos.component.css']
 })
 export class ModificarRetratosComponent implements OnInit {
-
   luchadores: ILuchador[] = [];
 
   constructor(private http: HttpClient) { }

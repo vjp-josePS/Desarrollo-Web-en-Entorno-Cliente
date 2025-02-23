@@ -1,7 +1,11 @@
-<div class="container">
-    <h3>{{ luchador.nombre }}</h3>
-    <img [src]="newImageUrl || luchador.retrato" alt="Retrato actual" style="max-width: 200px; max-height: 200px;">
-    <input type="file" (change)="onFileSelected($event)" accept="image/*">
-    <button (click)="actualizarRetrato()">Actualizar</button>
+<div class="card">
+  <img [src]="luchador.retrato" alt="{{ luchador.nombre }}" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">{{ luchador.nombre }}</h5>
+    <div class="form-group">
+      <label for="fileInput">Seleccionar nuevo retrato:</label>
+      <input type="file" class="form-control-file" id="fileInput" (change)="onFileSelected($event)">
+    </div>
+    <button class="btn btn-primary" (click)="uploadFile()" [disabled]="!selectedFile">Actualizar Retrato</button>
   </div>
-  
+</div>

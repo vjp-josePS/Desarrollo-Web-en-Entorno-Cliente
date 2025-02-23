@@ -1,67 +1,69 @@
 import { Component, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ILuchador } from '../interfaces/luchador.interface';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-edit-retrato',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './edit-retrato.component.html',
   styleUrls: ['./edit-retrato.component.css']
 })
 export class EditRetratoComponent {
-
-  @Input() luchador!: ILuchador;
+  @Input() luchador!: any;
   selectedFile: File | null = null;
-  newImageUrl: string | null = null; // Nueva propiedad para la URL de la imagen
+  nuevoRetrato: string = '';
+  urlAPI: string = 'http://localhost:3000/luchadores';
 
   constructor(private http: HttpClient) { }
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    this.previewImage(); // Mostrar vista previa de la imagen
+    if (this.selectedFile) {
+      this.getBase64(this.selectedFile)
+        .then(result => {
+          this.nuevoRetrato = result as string;
+        })
+        .catch(err => console.log(err));
+    }
   }
 
-  previewImage() {
-    if (this.selectedFile) {
+  getBase64 = (file: File) => {
+    return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onload = () => {
-        this.newImageUrl = reader.result as string; // Asignar la URL de la imagen
-      }
-      reader.readAsDataURL(this.selectedFile);
-    } else {
-      this.newImageUrl = null;
-    }
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
   }
 
-  actualizarRetrato() {
+  uploadFile() {
     if (this.selectedFile) {
-      const formData = new FormData();
-      formData.append('image', this.selectedFile, this.selectedFile.name);
-
-      // Intenta acceder a la propiedad 'id' del luchador, si existe
-      const luchadorId = (this.luchador as any).id;
-
-      if (luchadorId !== undefined) {
-        this.http.post(`http://localhost:3000/luchadores/${luchadorId}/retrato`, formData)
-          .subscribe(
-            response => {
-              console.log('Retrato actualizado correctamente');
-              // Actualizar la imagen en la interfaz
-              this.luchador.retrato = this.newImageUrl || this.luchador.retrato;
-              this.newImageUrl = null;
-              this.selectedFile = null;
-              alert('¡Retrato actualizado con éxito!');
-            },
-            error => {
-              console.error('Error al actualizar el retrato', error);
-              alert('Error al actualizar el retrato. Consulta la consola para más detalles.');
-            }
-          );
-      } else {
-        console.error('El luchador no tiene la propiedad "id".');
-        alert('El luchador no tiene la propiedad "id".');
-      }
-    } else {
-      alert('Por favor, selecciona una imagen antes de actualizar.');
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+      const body = JSON.stringify({ ...this.luchador, retrato: this.nuevoRetrato });
+  
+      this.http.put(`${this.urlAPI}/${encodeURIComponent(this.luchador.nombre)}`, body, { headers, responseType: 'text' })
+        .pipe(
+          catchError(error => {
+            console.error('Error en la petición PUT', error);
+            alert('Error al actualizar el retrato: ' + (error.error || error.message));
+            return throwError(() => error);
+          })
+        )
+        .subscribe({
+          next: (response: any) => {
+            console.log('Retrato actualizado correctamente', response);
+            alert('Retrato actualizado correctamente');
+            window.location.reload();
+          },
+          error: (error) => {
+            console.error('Error al actualizar el retrato', error);
+            alert('Error al actualizar el retrato');
+          }
+        });
     }
   }
+  
 }

@@ -1,7 +1,8 @@
 <div class="container">
-    <h2>Modificar Retratos</h2>
-    @for (luchador of luchadores; track luchador.nombre) {
+  <h1>Modificar Retratos de Luchadores</h1>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let luchador of luchadores">
       <app-edit-retrato [luchador]="luchador"></app-edit-retrato>
-    }
+    </div>
   </div>
-  
+</div>
