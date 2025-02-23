@@ -1,7 +1,6 @@
-<div class="container">
-  <h1>Modificar Retratos de Luchadores</h1>
-  <div class="row">
-    <div class="col-md-4" *ngFor="let luchador of luchadores">
+<div class="container-fluid d-flex justify-content-center align-items-center">
+  <div class="row w-100">
+    <div class="col-6 mb-4" *ngFor="let luchador of luchadores">
       <app-edit-retrato [luchador]="luchador"></app-edit-retrato>
     </div>
   </div>
