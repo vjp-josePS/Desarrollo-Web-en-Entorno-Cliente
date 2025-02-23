@@ -22,15 +22,18 @@ export class AreaSeleccionComponent implements OnInit {
   constructor(private http: HttpClient,  private router: Router) { }
 
   ngOnInit() {
+    // Obtiene los luchadores al inicializar el componente
     this.getLuchadores().subscribe(data => {
       this.luchadores = data;
     });
   }
 
+  // Método para obtener los luchadores del servidor
   getLuchadores(): Observable<ILuchador[]> {
-    return this.http.get<ILuchador[]>('http://localhost:3000/luchadores'); // Atributo 'db.json' con los luchadores
+    return this.http.get<ILuchador[]>('http://localhost:3000/luchadores');
   }
 
+  // Método para seleccionar o deseleccionar un luchador
   seleccionarLuchador(indice: number) {
     if (this.indiceSeleccionado === indice) {
       this.indiceSeleccionado = -1; // Deseleccionar
@@ -39,6 +42,7 @@ export class AreaSeleccionComponent implements OnInit {
     }
   }
 
+  // Listener para manejar eventos de teclado
   @HostListener('window:keydown', ['$event'])
   manejarEventoTeclado(event: KeyboardEvent) {
     switch (event.key) {
@@ -62,6 +66,7 @@ export class AreaSeleccionComponent implements OnInit {
     }
   }
 
+  // Método para mover la selección
   moverSeleccion(delta: number) {
     let nuevoIndice = this.indiceSeleccionado + delta;
 
@@ -75,9 +80,10 @@ export class AreaSeleccionComponent implements OnInit {
     this.indiceSeleccionado = nuevoIndice;
   }
 
+  // Método para seleccionar un luchador y navegar a la pantalla de lucha
   seleccionarYLuchar() {
     if (this.indiceSeleccionado !== -1) {
-      // Guardar el luchador seleccionado (por ejemplo, en el LocalStorage)
+      // Guardar el luchador seleccionado en el LocalStorage
       localStorage.setItem('luchadorSeleccionado', this.luchadores[this.indiceSeleccionado].nombre);
       // Navegar al componente "antes-luchar"
       this.router.navigate(['/antes-luchar']);

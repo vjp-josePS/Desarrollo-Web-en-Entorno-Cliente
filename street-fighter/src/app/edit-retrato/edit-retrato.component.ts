@@ -19,6 +19,7 @@ export class EditRetratoComponent {
 
   constructor(private http: HttpClient) { }
 
+  // Método que se ejecuta cuando se selecciona un archivo
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
     if (this.selectedFile) {
@@ -30,6 +31,7 @@ export class EditRetratoComponent {
     }
   }
 
+  // Método para convertir un archivo a base64
   getBase64 = (file: File) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -39,6 +41,7 @@ export class EditRetratoComponent {
     });
   }
 
+  // Método para subir el nuevo retrato
   uploadFile() {
     if (this.selectedFile) {
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -65,5 +68,4 @@ export class EditRetratoComponent {
         });
     }
   }
-  
 }

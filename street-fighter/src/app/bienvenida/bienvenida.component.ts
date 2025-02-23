@@ -10,6 +10,7 @@ export class BienvenidaComponent {
 
   constructor(private router: Router) { }
 
+  // Método para navegar al área de selección
   irAreaSeleccion() {
     this.router.navigate(['/area-seleccion']);
   }
