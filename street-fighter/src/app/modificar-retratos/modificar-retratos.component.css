@@ -13,3 +13,7 @@
     height: 50vh;
     border-radius: 20px;
 }
+
+.col{
+  background-color: transparent;
+}

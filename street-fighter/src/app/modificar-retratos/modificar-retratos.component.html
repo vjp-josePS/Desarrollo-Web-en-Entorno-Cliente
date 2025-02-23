@@ -1,7 +1,9 @@
 <div class="container-fluid d-flex justify-content-center align-items-center">
   <div class="row w-100">
-    <div class="col-6 mb-4" *ngFor="let luchador of luchadores">
-      <app-edit-retrato [luchador]="luchador"></app-edit-retrato>
-    </div>
+    @for (luchador of luchadores; track luchador.nombre) {
+      <div class="col-6 mb-4">
+        <app-edit-retrato [luchador]="luchador"></app-edit-retrato>
+      </div>
+    }
   </div>
 </div>
