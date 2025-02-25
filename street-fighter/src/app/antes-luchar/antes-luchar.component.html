@@ -1,0 +1,15 @@
+<div class="container-fluid d-flex justify-content-center align-items-center w-75">
+    <div class="luchador-seleccionado d-flex flex-column align-items-center">
+      <img [src]="luchadorSeleccionado?.animacion" alt="Animación del luchador seleccionado">
+      <h3>{{ luchadorSeleccionado?.nombre }}</h3>
+    </div>
+
+    <div>
+        <img src="../../assets/vs.png" alt="">
+    </div>
+    <div class="luchador-aleatorio d-flex flex-column align-items-center">
+      <img [src]="luchadorAleatorio?.animacion" alt="Animación del luchador aleatorio" class="oponente">
+      <h3>{{ luchadorAleatorio?.nombre }}</h3>
+    </div>
+  </div>
+  

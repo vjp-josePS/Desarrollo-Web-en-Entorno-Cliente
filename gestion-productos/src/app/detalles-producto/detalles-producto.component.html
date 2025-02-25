@@ -1,4 +1,27 @@
-<p>
-    detalles-producto works!
-  </p>
-  
+<div class="container d-flex justify-content-center">
+  <div class="card w-75 m-5 text-center">
+    <div class="card-header bg-primary text-white">
+      Detalles del Producto
+    </div>
+    <div class="card-body bg-info">
+      @if (producto) {
+        <img src="{{ producto.imagenUrl}}" alt="{{ producto.descripcion }}" style="width: 50%;" class="card-img rounded-4 m-3">
+        <h5 class="card-title">{{ producto.descripcion }}</h5>
+        <p class="card-text"><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+        <p class="card-text"><strong>Precio:</strong> {{ producto.precio | currency:'EUR' }}</p>
+        <p class="card-text"><strong>Disponibilidad:</strong> {{ producto.disponibilidad | date:'dd/MM/yyyy' }}</p>
+        <p class="card-text"><strong>Puntuación: </strong> 
+          @for (i of [1, 2, 3, 4, 5]; track i) {
+          <span class="fa-star text-dark"
+                [class.fas]="i <= producto.puntuacion"
+                [class.far]="i > producto.puntuacion">
+          </span>
+        }</p>
+        <a routerLink="/productos" class="btn btn-warning me-4">< Volver</a>
+        <a [routerLink]="['/productos/editar', producto.id]" class="btn btn-primary ms-4">Editar</a> <!-- Nuevo enlace -->
+      } @else {
+        <p class="card-text">Producto no encontrado</p>
+      }
+    </div>
+  </div>
+</div>

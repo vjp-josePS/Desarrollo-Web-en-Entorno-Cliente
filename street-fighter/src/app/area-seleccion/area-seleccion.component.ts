@@ -1,74 +1,94 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CargarLuchadoresService } from '../cargar-luchadores.service';
 import { ILuchador } from '../interfaces/luchador.interface';
 import { RetratoLuchadorComponent } from '../retrato-luchador/retrato-luchador.component';
 import { AtributosLuchadorComponent } from '../atributos-luchador/atributos-luchador.component';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-area-seleccion', // Selector para usar este componente en otros templates
-  standalone: true, // Indica que es un componente independiente (Angular 14+)
-  imports: [CommonModule, RetratoLuchadorComponent, AtributosLuchadorComponent], // Importa los módulos y componentes que usa este componente
-  templateUrl: './area-seleccion.component.html', // Definimos la ruta al archivo HTML del template
-  styleUrls: ['./area-seleccion.component.css'] // Definimos la ruta al archivo CSS de estilos
+  selector: 'app-area-seleccion',
+  standalone: true,
+  imports: [CommonModule, RetratoLuchadorComponent, AtributosLuchadorComponent],
+  templateUrl: './area-seleccion.component.html',
+  styleUrls: ['./area-seleccion.component.css']
 })
-export class AreaSeleccionComponent implements OnInit { // Clase del componente
-  luchadores: ILuchador[] = []; // Array para almacenar la lista de luchadores (tipo ILuchador)
-  indiceSeleccionado: number = -1; // Índice del luchador seleccionado (-1 indica que ninguno está seleccionado)
+export class AreaSeleccionComponent implements OnInit {
+  luchadores: ILuchador[] = [];
+  indiceSeleccionado: number = -1;
   numLuchadoresPorFila: number = 2; // Ajusta según tu diseño
 
-  constructor(private cargarLuchadoresService: CargarLuchadoresService) {} // Inyecta el servicio CargarLuchadoresService
+  constructor(private http: HttpClient,  private router: Router) { }
 
-  ngOnInit() { // Método del ciclo de vida que se ejecuta al inicializar el componente
-    this.luchadores = this.cargarLuchadoresService.getLuchadores(); // Obtiene la lista de luchadores del servicio
+  ngOnInit() {
+    // Obtiene los luchadores al inicializar el componente
+    this.getLuchadores().subscribe(data => {
+      this.luchadores = data;
+    });
   }
 
-  seleccionarLuchador(indice: number) { // Método para seleccionar un luchador por su índice
-    if (this.indiceSeleccionado === indice) { // Si el luchador ya está seleccionado
-      this.indiceSeleccionado = -1; // Deselecciona el luchador
-    } else { // Si el luchador no está seleccionado
-      this.indiceSeleccionado = indice; // Selecciona el luchador
+  // Método para obtener los luchadores del servidor
+  getLuchadores(): Observable<ILuchador[]> {
+    return this.http.get<ILuchador[]>('http://localhost:3000/luchadores');
+  }
+
+  // Método para seleccionar o deseleccionar un luchador
+  seleccionarLuchador(indice: number) {
+    if (this.indiceSeleccionado === indice) {
+      this.indiceSeleccionado = -1; // Deseleccionar
+    } else {
+      this.indiceSeleccionado = indice; // Seleccionar nuevo
     }
   }
 
-  @HostListener('window:keydown', ['$event']) // Escucha eventos de teclado en la ventana
-  manejarEventoTeclado(event: KeyboardEvent) { // Método para manejar los eventos de teclado
-    switch (event.key) { // Evalúa la tecla presionada
-      case 'ArrowLeft': // Si es la flecha izquierda
-        this.moverSeleccion(-1); // Mueve la selección un lugar a la izquierda
+  // Listener para manejar eventos de teclado
+  @HostListener('window:keydown', ['$event'])
+  manejarEventoTeclado(event: KeyboardEvent) {
+    switch (event.key) {
+      case 'ArrowLeft':
+        this.moverSeleccion(-1);
         break;
-      case 'ArrowRight': // Si es la flecha derecha
-        this.moverSeleccion(1); // Mueve la selección un lugar a la derecha
+      case 'ArrowRight':
+        this.moverSeleccion(1);
         break;
-      case 'ArrowUp': // Si es la flecha arriba
-        this.moverSeleccion(-this.numLuchadoresPorFila); // Mueve la selección un número de luchadores por fila hacia arriba
+      case 'ArrowUp':
+        this.moverSeleccion(-this.numLuchadoresPorFila);
         break;
-      case 'ArrowDown': // Si es la flecha abajo
-        this.moverSeleccion(this.numLuchadoresPorFila); // Mueve la selección un número de luchadores por fila hacia abajo
+      case 'ArrowDown':
+        this.moverSeleccion(this.numLuchadoresPorFila);
         break;
-      case 'Enter': // Si es la tecla Enter
-        if (this.indiceSeleccionado !== -1) { // Si hay un luchador seleccionado
+      case 'Enter':
+        if (this.indiceSeleccionado !== -1) {
           this.seleccionarLuchador(this.indiceSeleccionado); // Simula el click
         }
         break;
     }
   }
 
-  moverSeleccion(delta: number) { // Método para mover la selección de luchador
-    let nuevoIndice = this.indiceSeleccionado + delta; // Calcula el nuevo índice
+  // Método para mover la selección
+  moverSeleccion(delta: number) {
+    let nuevoIndice = this.indiceSeleccionado + delta;
 
     // Manejo de límites
-    if (nuevoIndice < 0) { // Si el nuevo índice es menor que 0
+    if (nuevoIndice < 0) {
       nuevoIndice = this.luchadores.length - 1; // Vuelve al último luchador
-    } else if (nuevoIndice >= this.luchadores.length) { // Si el nuevo índice es mayor o igual que la longitud del array
+    } else if (nuevoIndice >= this.luchadores.length) {
       nuevoIndice = 0; // Vuelve al primer luchador
     }
 
-    this.indiceSeleccionado = nuevoIndice; // Actualiza el índice seleccionado
+    this.indiceSeleccionado = nuevoIndice;
+  }
+
+  // Método para seleccionar un luchador y navegar a la pantalla de lucha
+  seleccionarYLuchar() {
+    if (this.indiceSeleccionado !== -1) {
+      // Guardar el luchador seleccionado en el LocalStorage
+      localStorage.setItem('luchadorSeleccionado', this.luchadores[this.indiceSeleccionado].nombre);
+      // Navegar al componente "antes-luchar"
+      this.router.navigate(['/antes-luchar']);
+    } else {
+      alert('Por favor, selecciona un luchador antes de continuar.');
+    }
   }
 }
-
-
-/*
-Este componente actúa como el "área de selección" principal. Gestiona la lista de luchadores, el luchador actualmente seleccionado, y la lógica para la selección con el teclado. También se encarga de cargar los luchadores desde el servicio CargarLuchadoresService y de comunicarse con los componentes RetratoLuchadorComponent y AtributosLuchadorComponent para mostrar la información de los luchadores.
-*/

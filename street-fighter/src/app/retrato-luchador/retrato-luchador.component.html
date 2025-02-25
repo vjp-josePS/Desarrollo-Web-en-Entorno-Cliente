@@ -1,8 +1,6 @@
 <div 
   class="card p-1 p-0"
-  [style.border-color]="getBorderColor()"
-  [class.border-3]="indiceSeleccionado === numLuchador"
-  [class.enfocado]="estaEnfocado"
+  [style.borderColor]="getBorderColor()"
   (click)="onSeleccionar()">
   <img 
     [src]="luchador.retrato" 

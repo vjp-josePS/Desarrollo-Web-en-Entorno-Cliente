@@ -1,0 +1,11 @@
+Instalar Angular CLI:
++ npm install -g @angular/cli
+
+Instalar json-server:
++ npm install -g json-server
+
+Arrancar json-server:
++ json-server --watch db.json --port 3000
+
+Ejecutar la aplicación Angular:
++ ng serve -o

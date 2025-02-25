@@ -1,0 +1,29 @@
+utilizamos node server.js para el servidor
+
+Comprobar si tenemos Node.js y npm:
++ node -v
++ npm -v
+
+Instalar Angular CLI:
++ npm install -g @angular/CLI
+
+Comprobar instalación de Angular CLI:
++ ng version
+
+Iniciar servidor:
++ ng server -o
+
+--------------------------------------
+
+- Para la API REST -
+
+Abrimos el terminal en la carpeta de la api
+
+Iniciamos el nuevo proyecto Node.js:
++ npm init -y
+
+Instalamos dependencias necesarias:
++ npm install exress cors
+
+Iniciamos el servidor API:
++ node server.js

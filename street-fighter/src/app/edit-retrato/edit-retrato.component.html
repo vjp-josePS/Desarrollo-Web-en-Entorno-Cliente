@@ -1,0 +1,17 @@
+<div class="card d-flex justify-content-center align-items-center">
+  <div class="row g-0">
+    <div class="col-md-4 d-flex align-items-center justify-content-center">
+      <img [src]="luchador.retrato" alt="{{ luchador.nombre }}" class="img-fluid w-100 h-100 object-fit-cover">
+
+    </div>
+    <div class="col-8">
+      <div class="card-body">
+        <h6 class="card-title mb-2">{{ luchador.nombre }}</h6>
+        <div>
+          <input type="file" class="form-control form-control-sm" (change)="onFileSelected($event)">
+        </div>
+        <button class="btn btn-primary btn-sm mt-2" (click)="uploadFile()" [disabled]="!selectedFile">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>

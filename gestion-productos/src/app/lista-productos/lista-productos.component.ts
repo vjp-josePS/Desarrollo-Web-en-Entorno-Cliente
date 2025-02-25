@@ -7,37 +7,51 @@ import { IProducto } from '../i-producto/i-producto';
 import { ProductoService } from '../producto.service';
 
 @Component({
-    selector: 'app-lista-productos',
-    standalone: true,
-    imports: [CommonModule, FormsModule, ItemProductoComponent, FiltroProductosPipe],
-    templateUrl: './lista-productos.component.html',
+  selector: 'app-lista-productos',  // Selector del componente
+  standalone: true,  // Define el componente como independiente
+  imports: [CommonModule, FormsModule, ItemProductoComponent, FiltroProductosPipe], // Módulos importados
+  templateUrl: './lista-productos.component.html',  // Ruta a la plantilla HTML
 })
 export class ListaProductosComponent implements OnInit {
-    productos: IProducto[] = [];
-    mostrarImagenes: boolean = true;
-    filtro: string = '';
-    mensajeError: string = '';
+  productos: IProducto[] = []; // Lista de productos
+  mostrarImagenes: boolean = true;  // Indica si se deben mostrar las imágenes
+  filtro: string = ''; // Término de búsqueda para filtrar productos
+  mensajeError: string = '';  // Mensaje de error en caso de fallo
 
-    constructor(private productoService: ProductoService) { }
+  constructor(private productoService: ProductoService) { } // Inyecta el servicio ProductoService
 
-    ngOnInit(): void {
-        this.productos = this.productoService.getProductos();
-    }
+  ngOnInit(): void {
+    // Cargar productos al inicializar el componente
+    this.productoService.getProductos().subscribe({
+      next: (listaProductos: IProducto[]) => { // Maneja la respuesta exitosa
+        this.productos = listaProductos;  // Asigna la lista de productos
+      },
+      error: (err: any) => { // Maneja el error
+        console.log(err);
+        this.mensajeError = 'Error al cargar los productos.';
+      },
+      complete: () => {  // Maneja la finalización
+        console.log('Fin de observable');
+      }
+    });
+  }
 
-    cambioEstrellas(producto: IProducto, nuevaPuntuacion: number): void {
-        // Clonar el producto para evitar la modificación directa
-        const productoActualizado = { ...producto, puntuacion: nuevaPuntuacion };
-        // Encontrar el índice del producto a actualizar
-        const index = this.productos.findIndex(p => p.id === producto.id);
-        // Si el producto se encuentra, actualizarlo
+  // Manejar cambio de puntuación
+  cambioEstrellas(producto: IProducto, nuevaPuntuacion: number): void {
+    this.productoService.actualizarPuntuacion(producto.id, nuevaPuntuacion).subscribe(
+      (productoActualizado: IProducto) => { // Maneja la respuesta exitosa
+        console.log('Producto actualizado:', productoActualizado);
+        const index = this.productos.findIndex(p => p.id === productoActualizado.id);  // Encuentra el índice del producto actualizado
         if (index !== -1) {
-            this.productos[index] = productoActualizado;
-        } else {
-            console.warn(`Producto con ID ${producto.id} no encontrado`);
+          this.productos[index] = productoActualizado;  // Actualiza el producto en la lista
         }
-    }
+      },
+      (error: any) => console.error('Error al actualizar la puntuación:', error)  // Maneja el error
+    );
+  }
 
-    toggleImagenes(): void {
-        this.mostrarImagenes = !this.mostrarImagenes;
-    }
+  // Alternar visualización de imágenes
+  toggleImagenes(): void {
+    this.mostrarImagenes = !this.mostrarImagenes; // Invierte el valor de mostrarImagenes
+  }
 }

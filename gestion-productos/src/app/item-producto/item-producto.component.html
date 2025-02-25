@@ -1,7 +1,7 @@
 @if (producto) {
     <td>
         @if (mostrarImagenes) {
-        <img [src]="producto.imagenUrl" alt="{{ producto.descripcion }}" height="100">
+        <img [src]="producto.imagenUrl" alt="{{ producto.descripcion }}" height="100px">
         }
     </td>
     <td><a [routerLink]="['/productos', producto.id]">{{ producto.descripcion }}</a></td>

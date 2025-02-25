@@ -1,0 +1,34 @@
+.card {
+    width: 100%;
+    height: 150px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    overflow: hidden;
+  }
+  
+  .card-img-top {
+    
+    object-fit: cover;
+  }
+  
+  .card-body {
+    padding: 5px;
+
+  }
+  
+  .card-title {
+
+    margin-bottom: 2px;
+  }
+  
+  .form-control-sm {
+
+    padding: 2px;
+  }
+  
+  .btn-sm {
+
+    padding: 2px 5px;
+  }
+  
