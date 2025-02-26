@@ -31,14 +31,14 @@ app.put('/luchadores/:nombre', (req, res) => {
     }
 
     let luchadores = JSON.parse(data);
-    const index = luchadores.findIndex(l => l.nombre === nombreLuchador);
+    const index = luchadores.luchadores.findIndex(l => l.nombre === nombreLuchador);
 
     if (index === -1) {
       res.status(404).send('Luchador no encontrado');
       return;
     }
 
-    luchadores[index] = {...luchadores[index], ...nuevosDatos};
+    luchadores.luchadores[index] = {...luchadores.luchadores[index], ...nuevosDatos};
 
     fs.writeFile('db.json', JSON.stringify(luchadores, null, 2), (err) => {
       if (err) {

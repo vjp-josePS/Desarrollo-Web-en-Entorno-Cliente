@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
+import { ILuchador } from '../interfaces/luchador.interface';
 
 @Component({
   selector: 'app-edit-retrato',
@@ -12,7 +13,7 @@ import { catchError, throwError } from 'rxjs';
   styleUrls: ['./edit-retrato.component.css']
 })
 export class EditRetratoComponent {
-  @Input() luchador!: any;
+  @Input() luchador!: ILuchador;
   selectedFile: File | null = null;
   nuevoRetrato: string = '';
   urlAPI: string = 'http://localhost:3000/luchadores';
@@ -46,7 +47,9 @@ export class EditRetratoComponent {
     if (this.selectedFile) {
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       const body = JSON.stringify({ ...this.luchador, retrato: this.nuevoRetrato });
-  
+
+      console.log('Nombre del luchador:', this.luchador.nombre);
+      
       this.http.put(`${this.urlAPI}/${encodeURIComponent(this.luchador.nombre)}`, body, { headers, responseType: 'text' })
         .pipe(
           catchError(error => {
@@ -63,7 +66,7 @@ export class EditRetratoComponent {
           },
           error: (error) => {
             console.error('Error al actualizar el retrato', error);
-            alert('Error al actualizar el retrato');
+            alert('Error al actualizar el retrato: ' + (error.error || error.message));
           }
         });
     }

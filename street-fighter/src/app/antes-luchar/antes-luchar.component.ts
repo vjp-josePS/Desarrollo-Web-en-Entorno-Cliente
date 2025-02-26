@@ -20,24 +20,25 @@ export class AntesLucharComponent implements OnInit {
 
   ngOnInit() {
     // Al inicializar el componente, obtiene los luchadores y selecciona uno aleatorio
-    this.getLuchadores().subscribe(luchadores => {
-      this.luchadores = luchadores;
+    this.getLuchadores().subscribe(data => {
+      this.luchadores = data.luchadores;
       this.luchadorSeleccionado = this.getLuchadorSeleccionado();
       this.luchadorAleatorio = this.getLuchadorAleatorio();
     });
   }
 
   // Método para obtener los luchadores del servidor
-  getLuchadores(): Observable<ILuchador[]> {
-    return this.http.get<ILuchador[]>('http://localhost:3000/luchadores');
+  getLuchadores(): Observable<{ luchadores: ILuchador[] }> { // Ajusta el tipo de retorno
+    return this.http.get<{ luchadores: ILuchador[] }>('http://localhost:3000/luchadores');
   }
 
   // Método para obtener el luchador seleccionado del localStorage
   getLuchadorSeleccionado(): ILuchador | undefined {
     if (typeof localStorage !== 'undefined') {
-      const luchadorSeleccionadoId = localStorage.getItem('luchadorSeleccionado');
-      if (luchadorSeleccionadoId) {
-        return this.luchadores.find(luchador => luchador.nombre === luchadorSeleccionadoId);
+      const luchadorSeleccionadoString = localStorage.getItem('luchadorSeleccionado');
+      if (luchadorSeleccionadoString) {
+        const luchadorSeleccionado = JSON.parse(luchadorSeleccionadoString) as ILuchador;
+        return luchadorSeleccionado;
       }
     }
     return undefined;

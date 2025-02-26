@@ -4,7 +4,7 @@
     @for (luchador of luchadores; track luchador.nombre; let i = $index) {
     <div class="retrato-container">
       <app-retrato-luchador [luchador]="luchador" [numLuchador]="i" [indiceSeleccionado]="indiceSeleccionado"
-        (seleccionado)="seleccionarLuchador($event)">
+        (seleccionado)="seleccionarLuchador(i)">
       </app-retrato-luchador>
     </div>
     }
@@ -12,14 +12,14 @@
 
   <!-- Sección Central: Animación del luchador seleccionado -->
   <div class="col-6 d-flex justify-content-center align-items-center">
-    @if (indiceSeleccionado !== -1) {
+    @if (indiceSeleccionado !== -1 && luchadores[indiceSeleccionado]) {
     <img [src]="luchadores[indiceSeleccionado].animacion" alt="Animación" class="img-fluid">
     }
   </div>
 
   <!-- Sección Derecha: Información y estadísticas del luchador -->
   <div class="col-3 d-flex flex-column justify-content-center align-items-center">
-    @if (indiceSeleccionado !== -1) {
+    @if (indiceSeleccionado !== -1 && luchadores[indiceSeleccionado]) {
     <!-- Nombre del luchador -->
     <h2 class="text-white">{{ luchadores[indiceSeleccionado].nombre }}</h2>
 

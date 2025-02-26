@@ -24,13 +24,14 @@ export class AreaSeleccionComponent implements OnInit {
   ngOnInit() {
     // Obtiene los luchadores al inicializar el componente
     this.getLuchadores().subscribe(data => {
-      this.luchadores = data;
+      console.log('Datos recibidos de la API:', data);
+      this.luchadores = data.luchadores; // Accede al array "luchadores" dentro del objeto
     });
   }
 
   // Método para obtener los luchadores del servidor
-  getLuchadores(): Observable<ILuchador[]> {
-    return this.http.get<ILuchador[]>('http://localhost:3000/luchadores');
+  getLuchadores(): Observable<{ luchadores: ILuchador[] }> { // Ajusta el tipo de retorno
+    return this.http.get<{ luchadores: ILuchador[] }>('http://localhost:3000/luchadores');
   }
 
   // Método para seleccionar o deseleccionar un luchador
@@ -80,11 +81,10 @@ export class AreaSeleccionComponent implements OnInit {
     this.indiceSeleccionado = nuevoIndice;
   }
 
-  // Método para seleccionar un luchador y navegar a la pantalla de lucha
   seleccionarYLuchar() {
     if (this.indiceSeleccionado !== -1) {
       // Guardar el luchador seleccionado en el LocalStorage
-      localStorage.setItem('luchadorSeleccionado', this.luchadores[this.indiceSeleccionado].nombre);
+      localStorage.setItem('luchadorSeleccionado', JSON.stringify(this.luchadores[this.indiceSeleccionado]));
       // Navegar al componente "antes-luchar"
       this.router.navigate(['/antes-luchar']);
     } else {

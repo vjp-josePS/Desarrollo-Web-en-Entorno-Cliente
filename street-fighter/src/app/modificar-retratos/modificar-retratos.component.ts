@@ -18,14 +18,13 @@ export class ModificarRetratosComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    // Obtiene los luchadores al inicializar el componente
-    this.getLuchadores().subscribe(luchadores => {
-      this.luchadores = luchadores;
+    this.getLuchadores().subscribe(data => {
+      console.log('Datos recibidos de la API (modificar-retratos):', data);
+      this.luchadores = data.luchadores; // Accede al array "luchadores" dentro del objeto
     });
   }
 
-  // Método para obtener los luchadores del servidor
-  getLuchadores(): Observable<ILuchador[]> {
-    return this.http.get<ILuchador[]>('http://localhost:3000/luchadores');
+  getLuchadores(): Observable<{ luchadores: ILuchador[] }> { // Ajusta el tipo de retorno
+    return this.http.get<{ luchadores: ILuchador[] }>('http://localhost:3000/luchadores');
   }
 }
